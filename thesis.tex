@@ -13,7 +13,7 @@
 
 %->> 文档设置 Document settings
 %---------------------------------------------------------------------------%
-
+\usepackage[<super>,list,table,math]{Style/artratex}
 %---------------------------------------------------------------------------%
 
 
@@ -30,26 +30,54 @@
 \input{Tex/Frontinfo}
 
 \begin{document}
+
   %-
-  %-> 前言：封面页, 摘要, 目录列表, 符号列表, 序言
-  %-> Frontmatter: title page, abstract, content list, symbol list, preface
+  %-> 前置部分：封面、声明、摘要、目录列表、符号列表
+  %-> Frontmatter: Title page, Declaration , Abstract, Content list, Symbol list
   %-
+
   % 初始化环境 initialize the environment
   \frontmatter
   \input{Tex/Frontmatter}
 
+  %-
+  %-> 主体部分：正文、参考文献
+  %-> Mainmatter: Main text, Bibliography
+  %-
+  
+  % 初始化环境 initialize the environment
+  \mainmatter
+  \input{Tex/Mainmatter}
 
-%-
-%-> 正文 Mainmatter
-%-
+  %-
+  %-> 附录部分：材料、数据术语汇编
+  %-> Backmatter: Material, Data, Glossary
+  %-
 
-%-
-%-> 附录 Appendix
-%-
+  % 初始化环境 initialize the environment
+  \backmatter
+  \intotoc*{\cleardoublepage}{\bibname}% add link to toc
+  % \artxifstreq{\artxbib}{bibtex}{% enable bibtex
+  %   \bibliography{Biblio/ref}% bibliography
+  % }{
+  % \printbibliography% bibliography
+  % }
+  \cleardoublepage
 
-%-
-%-> 后置事项：参考文献，术语汇编，索引
-%-> Backmatter: bibliography, glossary, index
-%-
+  %- 附录、材料 Appendix, Material
+  \appendix
+  \fancypagestyle{appendixheader}{
+    \fancyhf{}
+    \fancyhead[C]{\footnotesize 附录}
+    \fancyfoot[C]{\footnotesize \thepage}
+      \renewcommand{\headrulewidth}{0.8pt}
+      \renewcommand{\footrulewidth}{0pt}
+  }
+  \thispagestyle{appendixheader}
+
+  %- 致谢、成果 Acknowledge, Achievements
+  \backmatter
+  \input{Tex/Backmatter}
+
 \end{document}
 %---------------------------------------------------------------------------%

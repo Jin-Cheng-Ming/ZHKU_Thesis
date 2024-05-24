@@ -158,13 +158,15 @@
 %->> 新环境 New environments
 %---------------------------------------------------------------------------%
 %- 定义中文关键字环境 define chinese keywords
-\newcommand{\keywords}[1]{%
+\newcommand{\keywords}[1]{
     \vspace{\baselineskip}
-    \noindent {\bfseries \ZHKU@label@ch@keywords} #1}
+    \zihao{-4}
+    \noindent {\heiti\bfseries\ZHKU@label@ch@keywords}~\songti{#1}}
 %- 定义英文关键字环境 define engish keywords
-\newcommand{\KEYWORDS}[1]{%
+\newcommand{\KEYWORDS}[1]{
     \vspace{\baselineskip}
-    \noindent {\bfseries \ZHKU@label@en@keywords} #1}
+    \zihao{-4}
+    \noindent {\bfseries\ZHKU@label@en@keywords}~#1}
 %---------------------------------------------------------------------------%
 
 
@@ -178,7 +180,8 @@
 \newcommand{\classificationCode}[1] {\def\ZHKU@value@ch@classificationCode{#1}}
 \newcommand{\confidential}[1]       {\def\ZHKU@value@ch@confidential{#1}}
 \newcommand{\schoolLogo}[2][]       {\def\ZHKU@value@ch@schoolLogo{\includegraphics[#1]{#2}}}
-\newcommand{\thesisTitle}[1]        {\def\ZHKU@value@ch@thesisTitle{#1}}
+\newcommand{\enTitle}[1]            {\def\ZHKU@value@ch@enTitle{#1}}
+\newcommand{\coverTitle}[1]         {\def\ZHKU@value@ch@coverTitle{#1}}
 \newcommand{\authorName}[1]         {\def\ZHKU@value@ch@authorName{#1}}
 \newcommand{\advisor}[1]            {\def\ZHKU@value@ch@advisor{#1}}
 \newcommand{\institute}[1]          {\def\ZHKU@value@ch@institute{#1}}
@@ -226,7 +229,7 @@
       {
         \kaishu\bfseries\fontsize{45}{\baselineskip}{硕\qquad 士\qquad 学\qquad 位\qquad 论\qquad 文}\\
         \vspace*{\stretch{4}}
-        \heiti\bfseries\zihao{2}\textbf{\ZHKU@value@ch@thesisTitle}\\
+        \heiti\bfseries\zihao{2}\textbf{\ZHKU@value@ch@coverTitle}\\
         \vspace*{\stretch{8}}
         \heiti\zihao{3}\textbf{\ZHKU@value@ch@authorName}\\
         \vspace*{\stretch{8}}
@@ -360,37 +363,59 @@
         \cleardoublepage[empty]
     \fi
 }
+%---------------------------------------------------------------------------%
 
-
-% \newcommand{\makeDeclaration}{
-%   \cleardoublepage
-%   \thispagestyle{empty}
-%   {
-%     \songti\zihao{4}
-%     % \begin{center}
-%     %   \ZHKU@label@ch@university \\
-%     %   \ZHKU@label@ch@declare@creativity
-%     %     \parindent2em \ZHKU@value@ch@declare@creativity \\
-%     %   \ZHKU@label@ch@declare@rights
-%     %     \parindent2em \ZHKU@value@ch@declare@rights \\
-%     %   \ZHKU@label@ch@declare@submission
-%     %     \parindent2em \ZHKU@value@ch@declare@submission \\
-%     % \end{center}
-%     \begin{center} \ZHKU@label@ch@university \\ \end{center} 
-
-%     \begin{center} 
-%       \ZHKU@label@ch@declare@creativity \\
-%       \parindent2em
-%       \begin{flushleft}
-%         \ZHKU@value@ch@declare@creativity
-%       \end{flushleft}
-%     \end{center}  
-%     \begin{center} \ZHKU@label@ch@declare@rights \\ \end{center} 
-%     \parindent2em \ZHKU@value@ch@declare@rights \\
-
-%     \begin{center} \ZHKU@label@ch@declare@submission \\ \end{center} 
-%     \parindent2em \ZHKU@value@ch@declare@submission \\
-    
-%   }
-% }
+%->> 结构布局 Structure layout
+%---------------------------------------------------------------------------%
+%- 章 chapter
+\ctexset {
+    chapter = {
+        format = \linespread{1.0}\zihao{4}\bfseries\sffamily\centering,
+        nameformat = {},
+        titleformat = {},
+        number = \arabic{chapter},
+        numberformat = \rmfamily,
+        aftername = \quad,
+        beforeskip = {7pt},
+        afterskip = {18pt},
+        pagestyle = plain,
+    }
+}
+%- 节 section
+\ctexset {
+    section = {
+        format = \linespread{1.0}\zihao{-4}\sffamily\raggedright,
+        numberformat = \rmfamily,
+        aftername = \quad,
+        beforeskip = {24pt},
+        afterskip = {6pt},
+    }
+}
+%- 子节 subsection
+\ctexset {
+    subsection = {
+        format = \linespread{1.0}\zihao{-4}\sffamily\raggedright,
+        numberformat = \rmfamily,
+        aftername = \quad,
+        beforeskip = {12pt},
+        afterskip = {6pt},
+    }
+}
+%- 子节的子节（第三级） subsubsection
+\ctexset {
+    subsubsection = {
+        format = \linespread{1.0}\zihao{-4}\sffamily\raggedright,
+        numberformat = \rmfamily,
+        aftername = \quad,
+        beforeskip = {12pt},
+        afterskip = {6pt},
+    }
+}
+%- 附录 appendix
+\ctexset {
+    appendix = {
+        numbering = false,
+        number = \rmfamily\Alph{chapter},
+    }
+}
 %---------------------------------------------------------------------------%
