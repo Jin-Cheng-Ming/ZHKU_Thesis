@@ -861,6 +861,16 @@
     \definecolor{backgroundcolor}{rgb}{0.85,0.85,0.85}%
     \pagecolor{backgroundcolor}% background color
 \fi
+%-
+%-> 目录 Catalogue
+%-
+\makeatletter
+\renewcommand\tableofcontents{
+    \null\hfill{\heiti\zihao{-3}\bfseries\ZHKU@label@ch@tocname}\hfill\null\par
+    \@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}
+    \@starttoc{toc}
+}
+\makeatother
 %---------------------------------------------------------------------------%
 \endinput
 
