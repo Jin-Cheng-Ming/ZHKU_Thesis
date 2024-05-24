@@ -117,6 +117,15 @@
     \fi
   \fi
 }
+\newcommand{\ulunify}[1]{\uline{#1}}% unified name
+\newcommand{\ulenhance}[2][1pt]{% enhanced underline
+    \def\ULthickness{#1}% set thickness
+    \setlength{\ULdepth}{0.5em}% set depth
+    \expandafter\ulunify\expandafter{#2}% linebreak fix
+}
+\newcommand{\ulhshift}{-4em}% horizontal shift on underline
+\newcommand{\ulextend}[2][350pt]{% extend underline length
+    \hbox to #1{\hfill\hspace*{\ulhshift}#2\hfill}}
 %---------------------------------------------------------------------------%
 
 %->> 字体 Font
@@ -267,10 +276,111 @@
   \fi
   }
 }
-
 %-
 %-> Detect and adjust items
 %-
+%---------------------------------------------------------------------------%
 
 
+%->> 作者声明 Author declaration
+%---------------------------------------------------------------------------%
+\newcommand{\makeDeclaration}{
+    \cleardoublepage
+    \thispagestyle{empty}
+    {
+        \linespread{1.6}
+        \songti\fontsize{15}{1}
+
+        \begin{center}
+          \songti\bfseries\fontsize{21.5}{\baselineskip}
+          {\ZHKU@label@ch@university} \\[9pt]
+          {\ZHKU@label@ch@declare@creativity}
+        \end{center}
+        
+        {\ZHKU@value@ch@declare@creativity}
+
+        \vspace*{2ex}
+  
+        \begin{tabular}{p{19em}p{14em}}
+          \ZHKU@label@ch@declare@author \underline{\hbox to 48mm{}} \hfill & 
+          \ZHKU@label@ch@declare@date \underline{\hbox to 44mm{}}\\
+        \end{tabular}
+
+        \vspace*{6ex}
+
+        \begin{center}
+          \songti\bfseries\fontsize{21.5}{\baselineskip}
+          {\ZHKU@label@ch@declare@rights}
+        \end{center}
+
+        {\ZHKU@value@ch@declare@rights}
+
+        \vspace*{2ex}
+
+        \begin{tabular}{p{19em}p{14em}}
+          \ZHKU@label@ch@declare@author \underline{\hbox to 48mm{}} \hfill & 
+          \ZHKU@label@ch@declare@date \underline{\hbox to 44mm{}}\\[9pt]
+          \ZHKU@label@ch@declare@advisor \underline{\hbox to 48mm{}} \hfill & 
+          \ZHKU@label@ch@declare@date \underline{\hbox to 44mm{}}\\
+        \end{tabular}
+
+        \vspace*{6ex}
+
+        \begin{center}
+          \songti\bfseries\fontsize{21.5}{\baselineskip}  
+          {\ZHKU@label@ch@declare@submission}
+        \end{center}
+
+        {\ZHKU@value@ch@declare@submission}
+
+        \vspace*{2ex}
+
+        \begin{tabular}{p{19em}p{14em}}
+          \ZHKU@label@ch@declare@advisor \underline{\hbox to 48mm{}} \hfill & 
+          \ZHKU@label@ch@declare@date \underline{\hbox to 44mm{}}\\
+        \end{tabular}
+
+        \vspace*{3ex}
+
+        \vspace*{3ex}
+    }
+    \clearpage
+    \if@twoside
+        \thispagestyle{empty}
+        \cleardoublepage[empty]
+    \fi
+}
+
+
+% \newcommand{\makeDeclaration}{
+%   \cleardoublepage
+%   \thispagestyle{empty}
+%   {
+%     \songti\zihao{4}
+%     % \begin{center}
+%     %   \ZHKU@label@ch@university \\
+%     %   \ZHKU@label@ch@declare@creativity
+%     %     \parindent2em \ZHKU@value@ch@declare@creativity \\
+%     %   \ZHKU@label@ch@declare@rights
+%     %     \parindent2em \ZHKU@value@ch@declare@rights \\
+%     %   \ZHKU@label@ch@declare@submission
+%     %     \parindent2em \ZHKU@value@ch@declare@submission \\
+%     % \end{center}
+%     \begin{center} \ZHKU@label@ch@university \\ \end{center} 
+
+%     \begin{center} 
+%       \ZHKU@label@ch@declare@creativity \\
+%       \parindent2em
+%       \begin{flushleft}
+%         \ZHKU@value@ch@declare@creativity
+%       \end{flushleft}
+%     \end{center}  
+%     \begin{center} \ZHKU@label@ch@declare@rights \\ \end{center} 
+%     \parindent2em \ZHKU@value@ch@declare@rights \\
+
+%     \begin{center} \ZHKU@label@ch@declare@submission \\ \end{center} 
+%     \parindent2em \ZHKU@value@ch@declare@submission \\
+    
+%   }
+% }
 %---------------------------------------------------------------------------%
