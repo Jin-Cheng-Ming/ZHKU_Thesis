@@ -1,0 +1,11 @@
+# Latex编译产生的交叉文件
+*.log
+*.gz
+*.aux
+*.lof
+*.out
+*.thm
+*.toc
+*.bak
+*.bbl
+*.blg
