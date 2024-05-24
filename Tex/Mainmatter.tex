@@ -6,6 +6,9 @@
 \setcounter{page}{1}
 \pagestyle{mainmatterstyle}
 
+{
+为方便使用及更好地展示LaTeX排版的优秀特性，ucasthesis的框架和文件体系进行了细致地处理，尽可能地对各个功能和板块进行了模块化和封装。
+
 \section{初步设置}
 
 \begin{enumerate}
@@ -16,4 +19,87 @@
 \end{enumerate}
 
 编译完成即可获得本PDF说明文档。
+
+\section{文档目录简介}
+
+\subsection{Thesis.tex}
+
+Thesis.tex为主文档，其设计和规划了论文的整体框架，通过对其的阅读可以了解整个论文框架的搭建。
+
+\subsection{编译脚本}
+
+为方便本地编译，提供bat脚本和.sh脚本分别用于windows环境和unix环境。
+
+\begin{itemize}
+    \item Windows：双击Dos脚本artratex.bat可得全编译后的PDF文档，其存在是为了帮助不了解LaTeX编译过程的初学者跨过编译这第一道坎，请勿通过邮件传播和接收此脚本，以防范Dos脚本的潜在风险。
+    \item Linux或MacOS：在terminal中运行
+        \begin{itemize}
+            \item \verb|./artratex.sh xa|：获得全编译后的PDF文档
+            \item \verb|./artratex.sh x|：快速编译，不会生成文献引用
+        \end{itemize}
+\end{itemize}
+
+全编译指运行 \verb|xeLaTeX+bibtex+xeLaTeX+xeLaTeX| 以正确生成所有的引用链接，如目录、参考文献及引用等。在写作过程中若无添加新的引用，则可用快速编译，即只运行一遍LaTeX编译引擎以减少编译时间。
+
+\subsection{Tmp文件夹}
+
+运行编译脚本后，编译所生成的文档皆存于Tmp文件夹内，包括编译得到的PDF文档，其存在是为了保持工作空间的整洁。
+
+\subsection{Style文件夹}
+
+包含ucasthesis文档类的定义文件和配置文件，通过对它们的修改可以实现特定的模版设定。
+
+\begin{enumerate}
+    \item ucasthesis.cls：文档类定义文件，论文的最核心的格式即通过它来定义的。
+    \item ucasthesis.cfg：文档类配置文件，设定如目录显示为“目~录”而非“目录”。
+    \item artratex.sty: 常用宏包及文档设定，如参考文献样式、文献引用样式、页眉页脚设定等。这些功能具有开关选项，常只需在Thesis.tex中进行启用即可，一般无需修改artratex.sty本身。
+    \item artracom.sty：自定义命令以及添加宏包的推荐放置位置。
+\end{enumerate}
+
+\subsection{Tex文件夹}
+
+文件夹内为论文的所有实体内容，正常情况下，这也是使用ucasthesis撰写学位论文时，主要关注和修改的一个位置，注：所有文件都必须采用UTF-8编码，否则编译后将出现乱码文本，详细分类介绍如下：
+
+\begin{itemize}
+    \item Frontinfo.tex：为论文中英文封面信息。论文封面会根据英文学位名称如Master，Doctor自动切换为相应的格式。
+    \item Frontmatter.tex：为论文前言内容如中英文摘要等。
+    \item Mainmatter.tex：索引需要出现的Chapter。开始写论文时，可以只索引当前章节，以快速编译查看，当论文完成后，再对所有章节进行索引即可。
+    \item Chap{\_}xxx.tex：为论文主体的各章，可根据需要添加和撰写。添加新章时，可拷贝一个已有的章文件再重命名，以继承文档的 UTF8 编码。
+    \item Appendix.tex：为附录内容。
+    \item Backmatter.tex：为发表文章信息和致谢部分等。
+\end{itemize}
+
+\subsection{Img文件夹}
+
+用于放置论文中所需要的图类文件，支持格式有：.jpg, .png, .pdf。其中，\verb|ucas_logo.pdf|为国科大校徽。
+
+\subsection{Biblio文件夹}
+
+ ref.bib用于放置论文中所需要参考文献信息。
+
+\section{功能介绍}
+
+\subsection{参考文献引用}
+
+参考文献引用过程以实例进行介绍，假设需要引用名为"Document Preparation System"的文献，步骤如下：
+
+1）将Bib格式的参考文献信息添加到ref.bib文件中（此文件位于Biblio文件夹下），如直接粘贴自网站，请注意修改其格式。
+
+2）索引第一行 \verb|@article{lamport1986document,|中 \verb|lamport1986document| 即为此文献的label (中文文献也必须使用英文label，一般遵照：姓氏拼音+年份+标题第一字拼音的格式)，想要在论文中索引此文献,\verb|\citep{lamport1986document}|。如此处所示 \textsuperscript{\citep{lamport1986document}}。
+
+多文献索引用英文逗号隔开, 如此处所示 \textsuperscript{\citep{lamport1986document, chu2004tushu, chen2005zhulu}}。
+
+更多例子如：
+
+Walls等\textsuperscript{\citep{walls2013drought}}根据Betts\textsuperscript{\citep{betts2005aging}} 的研究，首次提出......理论。其中关于......的研究\textsuperscript{\citepns{walls2013drought, betts2005aging}}，是当前中国得到迅速发展的研究领域 \textsuperscript{\citep{chen1980zhongguo, bravo1990comparative}}。
+
+不同文献样式和引用样式，如著者-出版年制（authoryear）、顺序编码制（numbers）、上标顺序编码制（super）可在Thesis.tex中对artratex.sty调用实现，详见 \href{https://github.com/mohuangrui/ucasthesis/wiki}{ucasthesis 知识小站之文献样式}。
+
+%若在上标顺序编码制（super）模式下，希望在特定位置将上标改为嵌入式标，可使用 \citetns{niu2013zonghe,stamerjohanns2009mathml} 和 \citepns{niu2013zonghe,stamerjohanns2009mathml}。
+
+参考文献索引的更多知识，请见 \href{https://en.wikibooks.org/wiki/LaTeX/Bibliography_Management}{WiKibook Bibliography}。\nocite{*}% 使文献列表显示所有参考文献（包括未引用文献）
+
+
+}
+
 %---------------------------------------------------------------------------%

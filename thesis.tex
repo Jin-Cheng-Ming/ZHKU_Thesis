@@ -49,7 +49,15 @@
   % 初始化环境 initialize the environment
   \mainmatter
   \input{Tex/Mainmatter}
-  \thispagestyle{mainmatterstyle}
+  \intotoc*{\cleardoublepage}{\bibname}% add link to toc
+  \artxifstreq{\artxbib}{bibtex}{% enable bibtex
+    \bibliography{Biblio/ref}% bibliography
+  }{
+    \printbibliography% bibliography
+  }
+  \thispagestyle{noheaderstyle}
+
+  \cleardoublepage
 
   %-
   %-> 附录部分：材料、数据术语汇编
@@ -57,15 +65,7 @@
   %-
 
   % 初始化环境 initialize the environment
-  % \backmatter
-  
-  % \intotoc*{\cleardoublepage}{\bibname}% add link to toc
-  % \artxifstreq{\artxbib}{bibtex}{% enable bibtex
-  %   \bibliography{Biblio/ref}% bibliography
-  % }{
-  % \printbibliography% bibliography
-  % }
-  % \cleardoublepage
+  \backmatter
 
   %- 附录、材料 Appendix, Material
   \appendix
