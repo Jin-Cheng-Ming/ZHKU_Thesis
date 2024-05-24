@@ -97,7 +97,7 @@
 %->> 页面布局 Page layout
 %---------------------------------------------------------------------------%
 \usepackage{geometry}
-\geometry{a4paper,top=2.52cm,left=3.15cm,bottom=2.22cm,right=3.15cm}
+\geometry{a4paper,top=2.5cm,left=2.7cm,bottom=2.5cm,right=2.7cm}
 %---------------------------------------------------------------------------%
 
 %->> 样式控制命令 Style control commands
@@ -151,18 +151,6 @@
 %-
 %-> 中文项命令 Chinese item commands
 %-
-% \def\zhku@value@ch@schoolCode{}
-% \def\zhku@value@ch@studentCode{}
-% \def\zhku@value@ch@classificationCode{}
-% \def\zhku@value@ch@confidential{公开}
-% \def\zhku@value@ch@thesisTitle{}
-% \def\zhku@value@ch@authorName{}
-% \def\zhku@value@ch@advisor{}
-% \def\zhku@value@ch@college{}
-% \def\zhku@value@ch@major{}
-% \def\zhku@value@ch@city{中国·广州}
-% \def\zhku@value@ch@completionDate@year{}
-% \def\zhku@value@ch@completionDate@month{}
 \newcommand{\schoolCode}[1]         {\def\ZHKU@value@ch@schoolCode{#1}}
 \newcommand{\studentCode}[1]        {\def\ZHKU@value@ch@studentCode{#1}}
 \newcommand{\classificationCode}[1] {\def\ZHKU@value@ch@classificationCode{#1}}
@@ -186,7 +174,7 @@
   \thispagestyle{empty}
   {
     \zihao{-4}
-    \begin{tabular}{p{8cm}p{6cm}}
+    \begin{tabular}{p{9cm}p{6cm}}
       {
         \begin{tabular}[c]{rl}
           \hspace{-2em}\ZHKU@label@ch@schoolCode & \ZHKU@value@ch@schoolCode \\
@@ -195,7 +183,7 @@
       }
       &
       {
-        \begin{tabular}[c]{rl}
+        \begin{tabular}[c]{p{2em}l}
           \hspace{-2em}\ZHKU@label@ch@studentCode & \ZHKU@value@ch@studentCode \\
           \hspace{-2em}\ZHKU@label@ch@confidential & \ZHKU@value@ch@confidential \\
         \end{tabular}
@@ -205,7 +193,7 @@
   \\
   \vspace*{\stretch{1}}
   {
-    \begin{tabular}{p{0.5em}p{8cm}}
+    \begin{tabular}{p{0.8cm}p{8cm}}
       \hfill & \ZHKU@value@ch@schoolLogo 
     \end{tabular}
   }
@@ -215,25 +203,30 @@
     \begin{center}
       {
         \kaishu\bfseries\fontsize{45}{\baselineskip}{硕\qquad 士\qquad 学\qquad 位\qquad 论\qquad 文}\\
-        % \vspace{9pt}
         \vspace*{\stretch{4}}
-        \heiti\bfseries\fontsize{21.5}{\baselineskip}\textbf{\ZHKU@value@ch@thesisTitle}\\
-        % \vspace{24pt}
+        \heiti\bfseries\zihao{2}\textbf{\ZHKU@value@ch@thesisTitle}\\
         \vspace*{\stretch{8}}
-        \heiti\fontsize{15.5}{\baselineskip}\textbf{\ZHKU@value@ch@authorName}\\
-        % \vspace{24pt}
+        \heiti\zihao{3}\textbf{\ZHKU@value@ch@authorName}\\
         \vspace*{\stretch{8}}
       }
-      \songti\fontsize{14}{\baselineskip}
-      \def\arraystretch{1.3}
+      \songti\zihao{4}
       {
-        \begin{tabular}{rl}
-          \bfseries\textbf{\ZHKU@label@ch@advisor} & \ZHKU@value@ch@advisor 
-          \\[18pt]
-          \bfseries\textbf{\ZHKU@label@ch@institute} & \ZHKU@value@ch@institute 
-          \\[18pt]
-          \bfseries\textbf{\ZHKU@label@ch@major} & \ZHKU@value@ch@major 
-          \\[18pt]
+        \begin{tabular}{p{7em}p{10em}}
+          {
+            \begin{flushright}
+              \bfseries\textbf{\ZHKU@label@ch@advisor}\\[18pt]
+              \bfseries\textbf{\ZHKU@label@ch@institute}\\[18pt]
+              \bfseries\textbf{\ZHKU@label@ch@major}\\[18pt]
+            \end{flushright}
+          }
+          &
+          {
+            \begin{flushleft}
+              \ZHKU@value@ch@advisor\\[18pt]
+              \ZHKU@value@ch@institute\\[18pt]
+              \ZHKU@value@ch@major\\[18pt]
+            \end{flushleft}
+          }
         \end{tabular}
       } 
       \\
