@@ -14,6 +14,7 @@
 %->> 文档设置 Document settings
 %---------------------------------------------------------------------------%
 \usepackage[<super>,list,table,math]{Style/artratex}
+\usepackage{Style/artracom}
 %---------------------------------------------------------------------------%
 
 
@@ -48,6 +49,7 @@
   % 初始化环境 initialize the environment
   \mainmatter
   \input{Tex/Mainmatter}
+  \thispagestyle{mainmatterstyle}
 
   %-
   %-> 附录部分：材料、数据术语汇编
@@ -55,29 +57,27 @@
   %-
 
   % 初始化环境 initialize the environment
-  \backmatter
-  \intotoc*{\cleardoublepage}{\bibname}% add link to toc
+  % \backmatter
+  
+  % \intotoc*{\cleardoublepage}{\bibname}% add link to toc
   % \artxifstreq{\artxbib}{bibtex}{% enable bibtex
   %   \bibliography{Biblio/ref}% bibliography
   % }{
   % \printbibliography% bibliography
   % }
-  \cleardoublepage
+  % \cleardoublepage
 
   %- 附录、材料 Appendix, Material
   \appendix
-  \fancypagestyle{appendixheader}{
-    \fancyhf{}
-    \fancyhead[C]{\footnotesize 附录}
-    \fancyfoot[C]{\footnotesize \thepage}
-      \renewcommand{\headrulewidth}{0.8pt}
-      \renewcommand{\footrulewidth}{0pt}
-  }
-  \thispagestyle{appendixheader}
+  \input{Tex/Appendix}
+  % 开始页码与符号
+  \setcounter{page}{1}\pagenumbering{Roman}
+  \thispagestyle{noheaderstyle}
 
   %- 致谢、成果 Acknowledge, Achievements
   \backmatter
   \input{Tex/Backmatter}
+  \thispagestyle{noheaderstyle}
 
 \end{document}
 %---------------------------------------------------------------------------%

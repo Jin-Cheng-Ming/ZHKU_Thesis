@@ -766,9 +766,9 @@
     %- redefine the plain pagestyle. If you want the plain style inherits
     %- the current style, comment all the lines in plain style definition.
     \fancypagestyle{plain}{%
-        %\fancyhf{}% clear fields
-        %\renewcommand{\headrulewidth}{0pt}% header rule
-        %\renewcommand{\footrulewidth}{0pt}% footer rule
+        \fancyhf{}% clear fields
+        \renewcommand{\headrulewidth}{0pt}% header rule
+        \renewcommand{\footrulewidth}{0pt}% footer rule
     }
     \fancypagestyle{noheaderstyle}{% header and footer style for no header
         \fancyhf{}% clear fields
