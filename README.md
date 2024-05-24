@@ -9,10 +9,20 @@
 - [x] 原创性声明、版权使用授权书、论文提交同意书
 - [x] 中文摘要及关键词
 - [x] 英文摘要及关键词
-- [ ] 英文缩略词或符号表
+- [x] 英文缩略词或符号表
 - [ ] 目录
 - [ ] 正文
 - [ ] 参考文献
 - [x] 附录
 - [x] 致谢
 - [x] 作者简介
+
+使用到的开源项目：
+GB/T 7714-2015 BibTeX Style
+https://github.com/zepinglee/gbt7714-bibtex-style
+
+biblatex-gb7714-2015: a biblatex style package
+https://github.com/hushidong/biblatex-gb7714-2015
+
+ucasthesis 国科大学位论文 LaTeX 模板
+https://github.com/mohuangrui/ucasthesis
