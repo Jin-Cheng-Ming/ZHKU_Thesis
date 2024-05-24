@@ -98,6 +98,7 @@
 %---------------------------------------------------------------------------%
 \usepackage{geometry}
 \geometry{a4paper,top=2.5cm,left=2.7cm,bottom=2.5cm,right=2.7cm}
+\usepackage{fancyhdr}
 %---------------------------------------------------------------------------%
 
 %->> 样式控制命令 Style control commands
@@ -152,6 +153,18 @@
 \newCJKfontfamily\heiti{SimHei}[AutoFakeBold]
 \let\songti\relax
 \newCJKfontfamily\songti{SimSun}[AutoFakeBold]
+%---------------------------------------------------------------------------%
+
+%->> 新环境 New environments
+%---------------------------------------------------------------------------%
+%- 定义中文关键字环境 define chinese keywords
+\newcommand{\keywords}[1]{%
+    \vspace{\baselineskip}
+    \noindent {\bfseries \ZHKU@label@ch@keywords} #1}
+%- 定义英文关键字环境 define engish keywords
+\newcommand{\KEYWORDS}[1]{%
+    \vspace{\baselineskip}
+    \noindent {\bfseries \ZHKU@label@en@keywords} #1}
 %---------------------------------------------------------------------------%
 
 
@@ -276,9 +289,6 @@
   \fi
   }
 }
-%-
-%-> Detect and adjust items
-%-
 %---------------------------------------------------------------------------%
 
 

@@ -27,27 +27,17 @@
 %-
 %-> 封面页信息 Titlepage information
 %-
-\schoolCode{11347}
-\studentCode{2112907013}
-\classificationCode{S47 6}	
-\confidential{} 
-\schoolLogo[scale=1.2]{Image/zhku_logo}
-\thesisTitle{东洋区冠果蝇亚科系统分类学研究\\（双翅目：果蝇科）}
-\authorName{高~~某}
-\advisor{陈某某~~教授}
-\institute{农业与生物学院}
-\major{农业昆虫与害虫防治}
-\city{中国·广州}
-\degreeConferralDate{2024}{6}
+\input{Tex/Frontinfo}
 
 \begin{document}
+  %-
+  %-> 前言：封面页, 摘要, 目录列表, 符号列表, 序言
+  %-> Frontmatter: title page, abstract, content list, symbol list, preface
+  %-
+  % 初始化环境 initialize the environment
   \frontmatter
-  \makeTitle
-  \makeDeclaration
-%-
-%-> 前言：封面页, 摘要, 目录列表, 符号列表, 序言
-%-> Frontmatter: title page, abstract, content list, symbol list, preface
-%-
+  \input{Tex/Frontmatter}
+
 
 %-
 %-> 正文 Mainmatter
