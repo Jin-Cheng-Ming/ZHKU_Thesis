@@ -176,21 +176,25 @@
 
 % FIXME 表格里面列表结束之后会有空一行
 \begin{center}
-  \begin{longtable}{m{5cm}m{9cm}}
+  \begin{longtable}{m{4cm}m{10cm}}
     \bicaption{\quad 字体、字号与排版要求}{\quad Font, Size, Typography Requirements} \label{tab:printrequirements} \\
   
-    \hline\hline \textbf{内容} & \textbf{格式要求} \\ \hline\hline
+    \hline\hline 
+    \textbf{内容} & \textbf{格式要求} \\ 
+    \hline\hline
     \endfirsthead
     
-    \multicolumn{2}{c}%
-    {{\bfseries \tablename\ \thetable{} -- 续上表}} \\
-    \hline\hline \multicolumn{1}{c}{\textbf{内容}} & \multicolumn{1}{c}{\textbf{格式要求}} \\ \hline\hline
+    \multicolumn{2}{l}{{续上表}}\\
+    \hline\hline 
+    \multicolumn{1}{c}{\textbf{内容}} & \multicolumn{1}{c}{\textbf{格式要求}} \\ 
+    \hline\hline
     \endhead
     
-    \hline \multicolumn{2}{r}{{接下表}} \\
+    \hline 
+    \multicolumn{2}{r}{{接下表}} \\
     \endfoot
     
-    \hline \hline
+    \hline\hline
     \endlastfoot
     
     封面及书脊 & 要求按照示例模板。\\
