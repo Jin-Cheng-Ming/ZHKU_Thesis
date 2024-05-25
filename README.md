@@ -1,10 +1,12 @@
-# [zhkuThesis] 仲恺农业工程学院学位论文 Latex 模板
+# [ZHKU Thesis] 仲恺农业工程学院学位论文 Latex 模板
 
-## 模板简介
+## 🔈 模板简介
 
-## 快速开始
+一款基于 [ucasthesis](https://github.com/mohuangrui/ucasthesis)，并按照[《仲恺农业工程学院研究生学位论文撰写规范（2023年修订）》](https://yjs.zhku.edu.cn/info/1060/4945.htm)做样式适配的 Latex 模板。
 
-## 待办事项
+## ⭐ 快速开始
+
+## 🗒️ 待办事项
 
 v0.1:
 
@@ -22,8 +24,18 @@ v0.1:
 - [x] 附录
 - [x] 致谢
 - [x] 作者简介
+  
+## 📖 帮助文档
 
-## 使用到的开源项目
+- [简单粗暴LaTeX](https://github.com/wklchris/Note-by-LaTeX)
+- [ucasthesis 知识小站](https://github.com/mohuangrui/ucasthesis/wiki)
+- [WiKibook Tables](https://en.wikibooks.org/wiki/LaTeX/Tables)
+
+## ⚠️ 已知问题
+
+- [ ] 参考文献等不需要编号的页面，在目录里仍显示有页码
+
+## 👐 使用到的开源项目
 
 GB/T 7714-2015 BibTeX Style
 https://github.com/zepinglee/gbt7714-bibtex-style
