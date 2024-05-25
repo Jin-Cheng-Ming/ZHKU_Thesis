@@ -13,7 +13,7 @@ v0.1:
 - [x] 学术学位中文封面
 - [ ] 专业学位中文封面
 - [ ] 英文封面
-- [ ] 书脊
+- [x] 书脊
 - [x] 原创性声明、版权使用授权书、论文提交同意书
 - [x] 中文摘要及关键词
 - [x] 英文摘要及关键词
@@ -45,3 +45,6 @@ https://github.com/hushidong/biblatex-gb7714-2015
 
 ucasthesis 国科大学位论文 LaTeX 模板
 https://github.com/mohuangrui/ucasthesis
+
+latexspine LaTeX 书脊模板
+https://github.com/mohuangrui/latexspine
