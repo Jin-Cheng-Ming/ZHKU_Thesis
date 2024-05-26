@@ -3,44 +3,51 @@
 %-                        User-defined Commands                            -%
 %-                                                                         -%
 %---------------------------------------------------------------------------%
-%- Copyright (C) Huangrui Mo <huangrui.mo@gmail.com> 
+%- Copyright (C) Xinyu Ding <ding.xin.yu@foxmail.com> 
 %- This is free software: you can redistribute it and/or modify it
 %- under the terms of the GNU General Public License as published by
 %- the Free Software Foundation, either version 3 of the License, or
 %- (at your option) any later version.
+%===========================================================================%
+%->> 标识 Identification
 %---------------------------------------------------------------------------%
-%->> Identification
-%---------------------------------------------------------------------------%
-\NeedsTeXFormat{LaTeX2e}%
-\ProvidesPackage{artracom}[2014/10/01 v1.0 LaTeX macros package]%
-%---------------------------------------------------------------------------%
-%->> Declare options
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{artracom}[2024/05/26 v1.1 LaTeX macros package]
+%===========================================================================%
+%->> 声明选项 Declare options
 %---------------------------------------------------------------------------%
 %-
-%-> Handle non-implemented options
+%-> 处理并未实现的选项 Handle non-implemented options
 %-
-\DeclareOption*{%
-    \PackageWarning{artracom}{Unknown option '\CurrentOption'}%
+\DeclareOption*{
+    \PackageWarning{artracom}{Unknown option '\CurrentOption'}
 }
 %-
-%-> Terminates all options processing
+%-> 终止所有选项处理 Terminates all options processing
 %-
-\ProcessOptions\relax%
+\ProcessOptions\relax
+%===========================================================================%
+%->> 用户添加的包 User added packages
 %---------------------------------------------------------------------------%
-%->> User added packages
-%---------------------------------------------------------------------------%
-%- this part adds normal packages
-\RequirePackage{chemfig}% draw 2D chemical structures
+%-
+%-> 这部分添加普通的包 this part adds normal packages
+%-
+% draw 2D chemical structures
+\RequirePackage{chemfig}
 \RequirePackage[version=4]{mhchem}% typeset chemical formulae [mhchem|chemformula]
-%- this part adds packages that should be loaded at the very end
-\AtEndPreamble{%
-    %\RequirePackage{cleveref}% clever cross-referencing
+%- 
+%-> 这部分添加需要在最尾部时候加载的包
+%-> this part adds packages that should be loaded at the very end
+%-
+\AtEndPreamble{
+    % clever cross-referencing
+    %\RequirePackage{cleveref}
 }
-%---------------------------------------------------------------------------%
-%->> User defined commands
+%===========================================================================%
+%->> 用户自定义命令 User defined commands
 %---------------------------------------------------------------------------%
 %-
-%-> General information
+%-> 通用信息 General information
 %- 
 %- \def\macroname#1<sep1>#2<sep2>{macro content, use of argument #1, #2 ...}
 %- each parameter #n is the shortest possible input sequence that matches the
@@ -75,36 +82,59 @@
 %- However, math typefaces vary from field to field. To keep consistent typography
 %- and easy adaption, it it always best to create a corresponding command for 
 %- variables in each math category.  
-%\providecommand{\Scalar}[1]{#1}% scalar is the normal math typeset, italic
-\providecommand{\Vector}[1]{\boldsymbol{#1}}% general vectors in bold italic
-\providecommand{\unitVector}[1]{\boldsymbol{\mathbf{#1}}}% unit vectors in bold roman
-\providecommand{\Matrix}[1]{\boldsymbol{\mathbf{#1}}}% matrix in bold roman
-\providecommand{\unitMatrix}[1]{\boldsymbol{\mathbf{#1}}}% identity matrix in bold roman
-\providecommand{\Tensor}[1]{\boldsymbol{\mathsf{#1}}}% tensor in sans-serif bold italic
-\providecommand{\unitTensor}[1]{\boldsymbol{\mathsf{#1}}}% identity tensor in sans-serif bold
-\providecommand{\Unit}[1]{\,\mathrm{#1}}% units in roman
-\providecommand{\Const}[1]{\mathrm{#1}}% math constants, functions
-\providecommand{\Set}[1]{\mathbb{#1}}% special sets in blackboard bold
-\providecommand{\Div}{\operatorname{div}}% divergence operator
-\providecommand{\Order}{\operatorname{O}}% order operator
-\providecommand{\Trace}{\operatorname{tr}}% trace operator
-\providecommand{\Diag}{\operatorname{diag}}% diagonal
-\providecommand{\Def}{\operatorname{def}}% define
-\providecommand{\Loptr}{\operatorname{\mathcal{L}}}% spatial operator
-\providecommand{\Toptr}{\operatorname{\mathcal{LL}}}% temporal operator
-\providecommand{\Soptr}{\operatorname{\mathcal{S}}}% solution operator
-\providecommand{\Des}[1]{\mathrm{#1}}% descriptive superscripts and subscripts in roman type 
-\providecommand{\Rev}[1]{\begingroup\color{blue}{#1}\endgroup}% revision highlight
+% 标量是普通的数学排版，斜体 scalar is the normal math typeset, italic
+%\providecommand{\Scalar}[1]{#1}
+% 粗体斜体的普通向量 general vectors in bold italic
+\providecommand{\Vector}[1]{\boldsymbol{#1}}
+% 单位矢量用粗体罗马字体表示 unit vectors in bold roman
+\providecommand{\unitVector}[1]{\boldsymbol{\mathbf{#1}}}
+% 黑体罗马矩阵 matrix in bold roman
+\providecommand{\Matrix}[1]{\boldsymbol{\mathbf{#1}}}
+% 单位矩阵用粗体罗马字体表示 identity matrix in bold roman
+\providecommand{\unitMatrix}[1]{\boldsymbol{\mathbf{#1}}}
+% 张量为无衬线体粗体斜体 tensor in sans-serif bold italic
+\providecommand{\Tensor}[1]{\boldsymbol{\mathsf{#1}}}
+% 无衬线体粗体的单位张量 identity tensor in sans-serif bold
+\providecommand{\unitTensor}[1]{\boldsymbol{\mathsf{#1}}}
+% 罗马单位 units in roman
+\providecommand{\Unit}[1]{\,\mathrm{#1}}
+% 数学常量、函数 math constants, functions
+\providecommand{\Const}[1]{\mathrm{#1}}
+% 黑板粗体的特殊设置 special sets in blackboard bold
+\providecommand{\Set}[1]{\mathbb{#1}}
+% 发散算子 divergence operator
+\providecommand{\Div}{\operatorname{div}}
+% 阶数算子 order operator
+\providecommand{\Order}{\operatorname{O}}
+% 迹算子 trace operator
+\providecommand{\Trace}{\operatorname{tr}}
+% 对角线 diagonal
+\providecommand{\Diag}{\operatorname{diag}}
+% 定义 define
+\providecommand{\Def}{\operatorname{def}}
+% 空间算子 spatial operator
+\providecommand{\Loptr}{\operatorname{\mathcal{L}}}
+% 时间算子 temporal operator
+\providecommand{\Toptr}{\operatorname{\mathcal{LL}}}
+% 解算子 solution operator
+\providecommand{\Soptr}{\operatorname{\mathcal{S}}}
+% 描述性上标和下标，roman体 descriptive superscripts and subscripts in roman type 
+\providecommand{\Des}[1]{\mathrm{#1}}
+% 调整高亮显示 revision highlight
+\providecommand{\Rev}[1]{\begingroup\color{blue}{#1}\endgroup}
 %-
-%-> Graphical length factor
+%-> 图形长度系数 Graphical length factor
 %-
-\providecommand*{\onef}{0.6}% for single figure
-\providecommand*{\twof}{0.45}% for two subfigures
-\providecommand*{\trif}{0.32}% for three subfigures
+% 单图 for single figure
+\providecommand*{\onef}{0.6}
+% 双图 for two subfigures
+\providecommand*{\twof}{0.45}
+% 三图 for three subfigures
+\providecommand*{\trif}{0.32}
 %-
-%-> Add dots before equation number
+%-> 在方程式编号前添加点 Add dots before equation number
 %-
-\newcommand{\adddotsbeforeeqnnum}{\def\maketag@@@##1{\hbox{\m@th\normalfont\dots\ ##1}}}%
-%---------------------------------------------------------------------------%
+\newcommand{\adddotsbeforeeqnnum}{\def\maketag@@@##1{\hbox{\m@th\normalfont\dots\ ##1}}}
+%===========================================================================%
 \endinput
 
