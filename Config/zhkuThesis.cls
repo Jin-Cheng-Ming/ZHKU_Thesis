@@ -1,16 +1,15 @@
-% 文档类
 %---------------------------------------------------------------------------%
 %-                                                                         -%
 %-                           Document Class                                -%
 %-                                                                         -%
 %---------------------------------------------------------------------------%
-
-% 版权声明 Copyright 
-%---------------------------------------------------------------------------%
-
-%---------------------------------------------------------------------------%
-
-%->> 身份证 Identification
+%- Copyright (C) Xinyu Ding <ding.xin.yu@foxmail.com> 
+%- This is free software: you can redistribute it and/or modify it
+%- under the terms of the GNU General Public License as published by
+%- the Free Software Foundation, either version 3 of the License, or
+%- (at your option) any later version.
+%===========================================================================%
+%->> 标识 Identification
 %---------------------------------------------------------------------------%
 \NeedsTeXFormat{LaTeX2e}
 \newcommand*\@iflatexlater{\@ifl@t@r\fmtversion}
@@ -18,7 +17,7 @@
   \ClassError{zhkuThesis}{TeXLive/MikTex >= 2017 is required ...}{}
 }
 \ProvidesClass{zhkuThesis}[2024/05/23 v1.0 ZHKU thesis document class]
-
+%===========================================================================%
 %->> 声明选项 Declare options
 %---------------------------------------------------------------------------%
 %-
@@ -39,7 +38,8 @@
 %-> 语言 Language
 %-
 \newif\ifZHKU@plain \ZHKU@plainfalse
-\DeclareOption{scheme=plain}{% enable plain writing style
+% 开启 plain 写作样式 enable plain writing style
+\DeclareOption{scheme=plain}{
   \PassOptionsToClass{scheme=plain}{ctexbook}
   \ZHKU@plaintrue
 }
@@ -60,16 +60,14 @@
 %-> 终止所有选项处理 Terminates all options processing
 %-
 \ProcessOptions\relax
-%---------------------------------------------------------------------------%
-
+%===========================================================================%
 %->> 加载类信息 Load class information
 %---------------------------------------------------------------------------%
 \LoadClass[UTF8,a4paper,zihao=-4]{ctexbook}
 \@ifclasslater{ctexbook}{2017/01/01}{}{
   \ClassError{zhkuThesis}{ctex >= 2017/01/01 is required ...}{}
 }
-%---------------------------------------------------------------------------%
-
+%===========================================================================%
 %->> 依赖包 Required packages
 %---------------------------------------------------------------------------%
 % LaTeX engine detection
@@ -82,8 +80,7 @@
 \RequirePackage{ulem}
 % 
 \RequirePackage{graphicx}
-%---------------------------------------------------------------------------%
-
+%===========================================================================%
 %->> 加载类配置 Load class configuration
 %---------------------------------------------------------------------------%
 % class cfg loaded after package to make preamble commands take effect
@@ -92,19 +89,20 @@
   \InputIfFileExists{Config/zhkuThesis.cfg}{}{}
   \makeatother
 }
-%---------------------------------------------------------------------------%
-
+%===========================================================================%
 %->> 页面布局 Page layout
 %---------------------------------------------------------------------------%
 \usepackage{geometry}
 \geometry{a4paper,top=2.5cm,left=2.7cm,bottom=2.5cm,right=2.7cm}
 \usepackage{fancyhdr}
-%---------------------------------------------------------------------------%
-
+%===========================================================================%
 %->> 样式控制命令 Style control commands
 %---------------------------------------------------------------------------%
-%- redefine cleardoublepage to have page style argument
-\renewcommand{\cleardoublepage}[1][plain]{%
+%- 
+%-> 重定义 \cleardoublepage 使其有页面样式参数
+%-> redefine cleardoublepage to have page style argument
+%- 
+\renewcommand{\cleardoublepage}[1][plain]{
   \clearpage
   \if@twoside
     \ifodd
@@ -118,33 +116,43 @@
     \fi
   \fi
 }
-\newcommand{\ulunify}[1]{\uline{#1}}% unified name
-\newcommand{\ulenhance}[2][1pt]{% enhanced underline
-    \def\ULthickness{#1}% set thickness
-    \setlength{\ULdepth}{0.5em}% set depth
-    \expandafter\ulunify\expandafter{#2}% linebreak fix
+% unified name
+\newcommand{\ulunify}[1]{\uline{#1}}
+% enhanced underline
+\newcommand{\ulenhance}[2][1pt]{
+  % set thickness
+  \def\ULthickness{#1}
+  % set depth
+  \setlength{\ULdepth}{0.5em}
+  % linebreak fix
+  \expandafter\ulunify\expandafter{#2}
 }
-\newcommand{\ulhshift}{-4em}% horizontal shift on underline
-\newcommand{\ulextend}[2][350pt]{% extend underline length
-    \hbox to #1{\hfill\hspace*{\ulhshift}#2\hfill}}
-%---------------------------------------------------------------------------%
-
+% 下划线的水平偏移 horizontal shift on underline
+\newcommand{\ulhshift}{-4em}
+% 扩展下划线长度 extend underline length
+\newcommand{\ulextend}[2][350pt]{
+  \hbox to #1{\hfill\hspace*{\ulhshift}#2\hfill}}
+%===========================================================================%
 %->> 字体 Font
 %---------------------------------------------------------------------------%
-% 英文字体
+%-
+%-> 英文字体
+%-
 \setmainfont{Times New Roman} % 常规英文字体
 \setsansfont{Arial} % 非衬线字体
 \setmonofont{Consolas} % 打字机字体，代码字体
 
-%使用包来设置中文字体
-\usepackage{xeCJK}
 
-% 中文字体配置部分
-%正文字体
+%-
+%-> 中文字体配置部分
+%-
+% 使用包来设置中文字体
+\usepackage{xeCJK}
+% 正文字体
 \setCJKmainfont[AutoFakeBold=true]{SimSun}
-%无衬线字体
+% 无衬线字体
 \setCJKsansfont[AutoFakeBold=3]{KaiTi}
-%等宽字体
+% 等宽字体
 \setCJKmonofont[AutoFakeBold=3]{SimHei}
 
 \let\kaishu\relax
@@ -153,27 +161,28 @@
 \newCJKfontfamily\heiti{SimHei}[AutoFakeBold]
 \let\songti\relax
 \newCJKfontfamily\songti{SimSun}[AutoFakeBold]
-%---------------------------------------------------------------------------%
-
+%===========================================================================%
 %->> 新环境 New environments
 %---------------------------------------------------------------------------%
-%- 定义中文关键字环境 define chinese keywords
+%-
+%-> 定义中文关键字环境 define chinese keywords
+%-
 \newcommand{\keywords}[1]{
     \vspace{\baselineskip}
     \zihao{-4}
     \noindent {\heiti\bfseries\ZHKU@label@ch@keywords}~\songti{#1}}
-%- 定义英文关键字环境 define engish keywords
+%-
+%-> 定义英文关键字环境 define engish keywords
+%-
 \newcommand{\KEYWORDS}[1]{
     \vspace{\baselineskip}
     \zihao{-4}
     \noindent {\bfseries\ZHKU@label@en@keywords}~#1}
-%---------------------------------------------------------------------------%
-
-
+%===========================================================================%
 %->> 封面页 Titlepage
 %---------------------------------------------------------------------------%
 %-
-%-> 中文项命令 Chinese item commands
+%-> 中文项获取信息命令 Chinese item commands
 %-
 \newcommand{\schoolCode}[1]         {\def\ZHKU@value@ch@schoolCode{#1}}
 \newcommand{\studentCode}[1]        {\def\ZHKU@value@ch@studentCode{#1}}
@@ -285,16 +294,16 @@
         \cleardoublepage[empty]
       \fi
     \fi
-  \ifZHKU@print%
-    \hypersetup{% set hyperlinks
-        hidelinks,% remove link color and border
+  \ifZHKU@print
+    % 设置超链接 set hyperlinks
+    \hypersetup{
+      % 删除链接颜色和边框 remove link color and border
+      hidelinks,
     }
   \fi
   }
 }
-%---------------------------------------------------------------------------%
-
-
+%===========================================================================%
 %->> 作者声明 Author declaration
 %---------------------------------------------------------------------------%
 \newcommand{\makeDeclaration}{
@@ -363,11 +372,12 @@
         \cleardoublepage[empty]
     \fi
 }
-%---------------------------------------------------------------------------%
-
+%===========================================================================%
 %->> 结构布局 Structure layout
 %---------------------------------------------------------------------------%
-%- 章 chapter
+%-
+%-> 章 chapter
+%-
 \ctexset {
     chapter = {
         format = \linespread{1.0}\zihao{4}\bfseries\sffamily\centering,
@@ -381,7 +391,9 @@
         pagestyle = plain,
     }
 }
+%-
 %- 节 section
+%-
 \ctexset {
     section = {
         format = \linespread{1.0}\zihao{-4}\sffamily\raggedright,
@@ -391,7 +403,9 @@
         afterskip = {6pt},
     }
 }
-%- 子节 subsection
+%-
+%-> 子节 subsection
+%-
 \ctexset {
     subsection = {
         format = \linespread{1.0}\zihao{-4}\sffamily\raggedright,
@@ -401,7 +415,9 @@
         afterskip = {6pt},
     }
 }
-%- 子节的子节（第三级） subsubsection
+%-
+%-> 子节的子节（第三级） subsubsection
+%-
 \ctexset {
     subsubsection = {
         format = \linespread{1.0}\zihao{-4}\sffamily\raggedright,
@@ -411,17 +427,18 @@
         afterskip = {6pt},
     }
 }
-%- 附录 appendix
+%-
+%-> 附录 appendix
+%-
 \ctexset {
     appendix = {
         numbering = false,
         number = \rmfamily\Alph{chapter},
     }
 }
-%---------------------------------------------------------------------------%
-
+%===========================================================================%
 %->> 组件 Component
 %---------------------------------------------------------------------------%
 \usepackage{array}
 \usepackage{longtable}
-%---------------------------------------------------------------------------%
+%===========================================================================%
