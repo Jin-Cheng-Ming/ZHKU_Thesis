@@ -41,11 +41,8 @@
   %-
   \frontmatter{
     \input{Tex/Frontmatter}
-    \input{Tex/Prematter}% symbol list, preface content
-    \intobmk*{\cleardoublepage}{\contentsname}% add link to bookmark
-    \setcounter{page}{1}\pagenumbering{roman}
-    \thispagestyle{noheaderstyle}
-    \tableofcontents% content catalog
+    \input{Tex/Prematter}
+    \input{Tex/Catalogue}
   }
   %-
   %-> 主体部分：正文、参考文献（不编号）

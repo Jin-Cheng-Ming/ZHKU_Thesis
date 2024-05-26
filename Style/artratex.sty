@@ -859,7 +859,7 @@
     }
 \fi
 %-
-%-> Page background
+%-> 页面背景 Page background
 %-
 \ifartx@background%
     \definecolor{backgroundcolor}{rgb}{0.85,0.85,0.85}%
@@ -874,6 +874,8 @@
     \@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}
     \@starttoc{toc}
 }
+\renewcommand{\listfigurename}{\ZHKU@label@ch@lsfigname}
+\renewcommand{\listtablename}{\ZHKU@label@ch@lstabname}
 \makeatother
 %---------------------------------------------------------------------------%
 \endinput

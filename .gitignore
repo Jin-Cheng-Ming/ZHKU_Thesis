@@ -1,6 +1,5 @@
 # Latex编译产生的交叉文件
 *.log
-*.gz
 *.aux
 *.lof
 *.out
@@ -9,5 +8,17 @@
 *.bak
 *.bbl
 *.blg
+*.idx
+*.ind
+*.acn
+*.acr
+*.alg
+*.gls
+*.ist
+*.fls
+*.lot
+*.spl
+*.synctex.gz
+*.fdb_latexmk
 
 .vscode/
