@@ -3,317 +3,372 @@
 %-                           Document Style                                -%
 %-                                                                         -%
 %---------------------------------------------------------------------------%
-%- Copyright (C) Huangrui Mo <huangrui.mo@gmail.com> 
+%- Copyright (C) Xinyu Ding <ding.xin.yu@foxmail.com> 
 %- This is free software: you can redistribute it and/or modify it
 %- under the terms of the GNU General Public License as published by
 %- the Free Software Foundation, either version 3 of the License, or
 %- (at your option) any later version.
+%===========================================================================%
+%->> 标识 Identification
 %---------------------------------------------------------------------------%
-%->> Identification
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{artratex}[2024/05/26 v1.1 LaTeX macros package]
+%===========================================================================%
+%->> 声明选项 Declare options
 %---------------------------------------------------------------------------%
-\NeedsTeXFormat{LaTeX2e}%
-\ProvidesPackage{artratex}[2014/10/01 v1.0 LaTeX macros package]%
-%---------------------------------------------------------------------------%
-%->> Declare options
-%---------------------------------------------------------------------------%
-\RequirePackage{etoolbox}% a toolbox of programming facilities
-\newcommand{\artxifstreq}{\expandafter\ifstrequal\expandafter}% expansion control
+% 程序设计工具箱 a toolbox of programming facilities
+\RequirePackage{etoolbox}
+% 扩展控制 expansion control
+\newcommand{\artxifstreq}{\expandafter\ifstrequal\expandafter}
 %-
-%-> Platform fontset <windows>, <mac>, <adobe>, <none>, <times>, <others>
+%-> 平台字体 Platform fontset <windows>, <mac>, <adobe>, <none>, <times>, <others>
 %-
+%- 获取用户指定的fontset值或根据os类型自动设置
 %- Fetch the fontset value as user specified or automatically set based on os type
-\RequirePackage{expl3}% LaTeX3 programming environment
-\ExplSyntaxOn%
-\providecommand{\g__ctex_fontset_tl}{}% platform fontset state variable
-\edef\artxfontset{\g__ctex_fontset_tl}% expanded platform fontset state variable
-\ExplSyntaxOff%
-%- Specify font set according to the value of fontset
+% LaTeX3编程环境 LaTeX3 programming environment
+\RequirePackage{expl3}
+\ExplSyntaxOn
+% 平台字体集状态变量 platform fontset state variable
+\providecommand{\g__ctex_fontset_tl}{}
+% 扩展平台字体集状态变量 expanded platform fontset state variable
+\edef\artxfontset{\g__ctex_fontset_tl}
+\ExplSyntaxOff
+%- 根据 fontset 的值指定字体集 Specify font set according to the value of fontset
 \newif\ifartx@windows \artx@windowsfalse
 \newif\ifartx@mac \artx@macfalse
 \newif\ifartx@adobe \artx@adobefalse
 \newif\ifartx@none \artx@nonefalse
 \newif\ifartx@times \artx@timesfalse
 \newif\ifartx@others \artx@othersfalse
-\artxifstreq{\artxfontset}{windows}{\artx@windowstrue\artx@timestrue}{%
-\artxifstreq{\artxfontset}{mac}{\artx@mactrue\artx@timestrue}{%
-\artxifstreq{\artxfontset}{adobe}{\artx@adobetrue\artx@timestrue}{%
-\artxifstreq{\artxfontset}{none}{\artx@nonetrue\artx@timestrue}{%
+\artxifstreq{\artxfontset}{windows}{\artx@windowstrue\artx@timestrue}{
+\artxifstreq{\artxfontset}{mac}{\artx@mactrue\artx@timestrue}{
+\artxifstreq{\artxfontset}{adobe}{\artx@adobetrue\artx@timestrue}{
+\artxifstreq{\artxfontset}{none}{\artx@nonetrue\artx@timestrue}{
 \artx@otherstrue\artx@timesfalse}}}}
 %-
-%-> LaTeX engine <pdflatex>, <lualatex>, <xelatex>
+%-> LaTeX 编译器 LaTeX engine <pdflatex>, <lualatex>, <xelatex>
 %-
 \newif\ifartx@pdftex \artx@pdftexfalse
 \newif\ifartx@luatex \artx@luatexfalse
 \newif\ifartx@xetex \artx@xetexfalse
-\RequirePackage{ifxetex,ifluatex}% LaTeX engine detection
-\ifxetex%
+% LaTeX编译器检测 LaTeX engine detection
+\RequirePackage{ifxetex,ifluatex}
+\ifxetex
     \artx@xetextrue
-    \RequirePackage{xeCJK}% support calling system fonts
-\else\ifluatex%
+    % 支持调用系统字体 support calling system fonts
+    \RequirePackage{xeCJK}
+\else\ifluatex
     \artx@luatextrue
-\else%
+\else
     \artx@pdftextrue
-\fi\fi%
+\fi\fi
 %-
-%-> Bibliography engine <bibtex>, <biber>
+%-> 书目编译器 Bibliography engine <bibtex>, <biber>
 %-
 \newif\ifartx@bibtex \artx@bibtextrue
 \newif\ifartx@biber \artx@biberfalse
 \def\artxbib{bibtex}
-\DeclareOption{bibtex}{%
+\DeclareOption{bibtex}{
     \artx@bibtextrue
     \artx@biberfalse
     \def\artxbib{bibtex}
 }
-\DeclareOption{biber}{%
+\DeclareOption{biber}{
     \artx@bibtexfalse
     \artx@bibertrue
     \def\artxbib{biber}
 }
 %-
-%-> Citation and reference style
+%-> 引文和参考文体 Citation and reference style
 %-
 \newif\ifartx@numbers \artx@numberstrue
 \newif\ifartx@super \artx@superfalse
 \newif\ifartx@authoryear \artx@authoryearfalse
 \newif\ifartx@alpha \artx@alphafalse
-\DeclareOption{numbers}{%
+\DeclareOption{numbers}{
     \artx@numberstrue
     \artx@superfalse
     \artx@authoryearfalse
     \artx@alphafalse
 }
-\DeclareOption{super}{%
+\DeclareOption{super}{
     \artx@numberstrue
     \artx@supertrue
     \artx@authoryearfalse
     \artx@alphafalse
 }
-\DeclareOption{authoryear}{%
+\DeclareOption{authoryear}{
     \artx@numbersfalse
     \artx@superfalse
     \artx@authoryeartrue
     \artx@alphafalse
 }
-\DeclareOption{alpha}{%
+\DeclareOption{alpha}{
     \artx@numbersfalse
     \artx@superfalse
     \artx@authoryearfalse
     \artx@alphatrue
 }
 %-
-%-> Page layout reconfiguration
+%-> 页面布局重设 Page layout reconfiguration
 %-
 \newif\ifartx@geometry \artx@geometryfalse
-\DeclareOption{geometry}{%
+\DeclareOption{geometry}{
     \artx@geometrytrue
 }
 %-
-%-> Landscape layout support
+%-> 横向支持 Landscape layout support
 %-
 \newif\ifartx@lscape \artx@lscapefalse
-\DeclareOption{lscape}{%
+\DeclareOption{lscape}{
     \artx@lscapetrue
 }
 %-
-%-> Header and footer
+%-> 页眉和页脚 Header and footer
 %-
 \newif\ifartx@xhf \artx@xhftrue
-\DeclareOption{xhf}{%
+\DeclareOption{xhf}{
     \artx@xhffalse
 }
 %-
-%-> Color support
+%-> 颜色支持 Color support
 %-
 \newif\ifartx@color \artx@colorfalse
-\DeclareOption{color}{%
+\DeclareOption{color}{
     \artx@colortrue
 }
 \newif\ifartx@xlink \artx@xlinkfalse
-\DeclareOption{xlink}{%
+\DeclareOption{xlink}{
     \artx@xlinktrue
 }
 %-
-%-> Page background
+%-> 页面背景 Page background
 %-
 \newif\ifartx@background \artx@backgroundfalse
-\DeclareOption{background}{%
+\DeclareOption{background}{
     \artx@colortrue
     \artx@backgroundtrue
 }
 %-
-%-> Complex diagrams support
+%-> 复杂图支持 Complex diagrams support
 %-
 \newif\ifartx@tikz \artx@tikzfalse
-\DeclareOption{tikz}{%
+\DeclareOption{tikz}{
     \artx@colortrue
     \artx@tikztrue
 }
 %-
-%-> Complex tables support
+%-> 复杂表支持 Complex tables support
 %-
 \newif\ifartx@table \artx@tablefalse
-\DeclareOption{table}{%
+\DeclareOption{table}{
     \artx@tabletrue
 }
 %-
-%-> Enhanced list
+%-> 增强列表 Enhanced list
 %-
 \newif\ifartx@list \artx@listfalse
-\DeclareOption{list}{%
+\DeclareOption{list}{
     \artx@colortrue
     \artx@listtrue
 }
 %-
-%-> Extra math support
+%-> 额外的数学支持 Extra math support
 %-
 \newif\ifartx@math \artx@mathfalse
-\DeclareOption{math}{%
+\DeclareOption{math}{
     \artx@mathtrue
 }
 %-
-%-> Handle non-implemented options
+%-> 处理未实现的选项 Handle non-implemented options
 %-
-\DeclareOption*{%
+\DeclareOption*{
     \PackageWarning{artratex}{Unknown option '\CurrentOption'}%
 }
 %-
-%-> Terminates all options processing
+%-> 终止所有的选项处理 Terminates all options processing
 %-
-\ProcessOptions\relax%
+\ProcessOptions\relax
+%===========================================================================%
+%->> 包宏 Package macros
 %---------------------------------------------------------------------------%
-%->> Package macros
-%---------------------------------------------------------------------------%
 %-
-%-> Detect class and counter
+%-> 检测类和计数器 Detect class and counter
 %-
-\newcommand*{\artxifcnt}[1]{% check if counter exists
-    \ifcsname c@#1\endcsname%
-        \expandafter\@firstoftwo%
-    \else%
-        \expandafter\@secondoftwo%
+% 检查计数器是否存在 check if counter exists
+\newcommand*{\artxifcnt}[1]{
+    \ifcsname c@#1\endcsname
+        \expandafter\@firstoftwo
+    \else
+        \expandafter\@secondoftwo
     \fi
 }
-\artxifcnt{chapter}{\def\artxmaincnt{chapter}}{\def\artxmaincnt{section}}%
+\artxifcnt{chapter}{\def\artxmaincnt{chapter}}{\def\artxmaincnt{section}}
 %-
-%-> Nomenclature item
+%-> 命名项 Nomenclature item
 %-
-\providecommand{\nomenclatureitem}[3][ ]{%
+\providecommand{\nomenclatureitem}[3][ ]{
     \noindent\makebox[0.15\textwidth][l]{#2}{{#3}\hfill{#1}}\par
 }
 %-
-%-> Macro for adding link to toc and bookmark
+%-> 用于添加到toc和书签的链接的宏 Macro for adding link to toc and bookmark
 %-
-\newcommand{\intotocnostar}[3]{% [<\chapter|...>,<*>,<title>][example: \intotoc\chapter*{Nomenclature}]
-    \edef\artxmark{\expandafter\@gobble\string#1}% get the string 'cmd' after '\' in a command '\cmd'
-    #1#2{% excute command
-        \phantomsection% create bookmark link
-        \addcontentsline{toc}{\artxmark}{#3}% add content #3 to toc as #1
-        #3%
+% [<\chapter|...>,<*>,<title>][example: \intotoc\chapter*{Nomenclature}]
+\newcommand{\intotocnostar}[3]{
+    % 在\cmd命令中获取反斜杠后面的cmd字符串 get the string 'cmd' after '\' in a command '\cmd'
+    \edef\artxmark{\expandafter\@gobble\string#1}
+    % 执行命令 excute command
+    #1#2{
+        % 创建书签链接 create bookmark link
+        \phantomsection
+        % 将内容3加入目录1中 add content #3 to toc as #1
+        \addcontentsline{toc}{\artxmark}{#3}
+        #3
     }
-    \artxifstreq{\artxmark}{chapter}{%
-        \markboth{\MakeUppercase{#3}}{}% set left mark
-    }{%
-        \markright{\MakeUppercase{#3}}% set right mark
-    }
-}
-\newcommand{\intotocstar}[3][\artxmaincnt]{% [<chapter|...>,<extra commands>,<title>][example: \intotoc*{\cleardoublepage}{Abstract}]
-    #2% excute command
-    \phantomsection% create bookmark link
-    \addcontentsline{toc}{#1}{#3}% add content #3 to toc as #1
-    \artxifstreq{#1}{chapter}{%
-        \markboth{\MakeUppercase{#3}}{}% set left mark
-    }{%
-        \markright{\MakeUppercase{#3}}% set right mark
+    \artxifstreq{\artxmark}{chapter}{
+        % set left mark
+        \markboth{\MakeUppercase{#3}}{}
+    }{
+        % set right mark
+        \markright{\MakeUppercase{#3}}
     }
 }
-\newcommand{\intotoc}{\@ifstar{\intotocstar}{\intotocnostar}}% swap starred and non-starred versions
-\newcommand{\intobmknostar}[4][0]{% [<level>,<\chapter|...>,<*>,<title>] [example: \intobmk\chapter*{Abstract}]
-    \edef\artxmark{\expandafter\@gobble\string#2}% get the string 'cmd' after '\' in a command '\cmd'
-    #2#3{% excute command
-        \phantomsection% create bookmark link
-        \Hy@writebookmark% write bookmark
-        {}%
-        {#4}%
-        {\@currentHref}%
-        {#1}%
-        {toc}%
-        #4%
-    }%
-    \artxifstreq{\artxmark}{chapter}{%
-        \markboth{\MakeUppercase{#4}}{}% set left mark
-    }{%
-        \markright{\MakeUppercase{#4}}% set right mark
+% [<chapter|...>,<extra commands>,<title>][example: \intotoc*{\cleardoublepage}{Abstract}]
+\newcommand{\intotocstar}[3][\artxmaincnt]{
+    % 执行命令 excute command
+    #2
+    % 创建书签链接 create bookmark link
+    \phantomsection
+    % 将内容3加入目录1中 add content #3 to toc as #1
+    \addcontentsline{toc}{#1}{#3}
+    \artxifstreq{#1}{chapter}{
+        % set left mark
+        \markboth{\MakeUppercase{#3}}{}
+    }{
+        % set right mark
+        \markright{\MakeUppercase{#3}}
     }
 }
-\newcommand{\intobmkstar}[3][0]{% [<level>,<extra commands>,<title>] [example: \intobmk*{\cleardoublepage}{\contentsname}]
-    #2% excute command
-    \phantomsection% create bookmark link
-    \Hy@writebookmark% write bookmark
-    {}%
-    {#3}%
-    {\@currentHref}%
-    {#1}%
-    {toc}%
-    \artxifstreq{#1}{0}{%
-        \markboth{\MakeUppercase{#3}}{}% set left mark
-    }{%
-        \markright{\MakeUppercase{#3}}% set right mark
+% swap starred and non-starred versions
+\newcommand{\intotoc}{\@ifstar{\intotocstar}{\intotocnostar}}
+% [<level>,<\chapter|...>,<*>,<title>] [example: \intobmk\chapter*{Abstract}]
+\newcommand{\intobmknostar}[4][0]{
+    % 在\cmd命令中获取反斜杠后面的cmd字符串 get the string 'cmd' after '\' in a command '\cmd'
+    \edef\artxmark{\expandafter\@gobble\string#2}
+    % 执行命令 excute command
+    #2#3{
+        % 创建书签链接 create bookmark link
+        \phantomsection
+        % 写书签 write bookmark
+        \Hy@writebookmark
+        {}
+        {#4}
+        {\@currentHref}
+        {#1}
+        {toc}
+        #4
+    }
+    \artxifstreq{\artxmark}{chapter}{
+        % set left mark
+        \markboth{\MakeUppercase{#4}}{}
+    }{
+        % set right mark
+        \markright{\MakeUppercase{#4}}
     }
 }
-\newcommand{\intobmk}{\@ifstar{\intobmkstar}{\intobmknostar}}% swap starred and non-starred versions
-%\newcommand{\rmlbk}[1]{\begingroup\def\\{\relax\ifhmode\unskip\fi\space\ignorespaces}#1\endgroup}% remove line breaks 
+% [<level>,<extra commands>,<title>] [example: \intobmk*{\cleardoublepage}{\contentsname}]
+\newcommand{\intobmkstar}[3][0]{
+    % 执行命令 excute command
+    #2
+    % 创建书签链接 create bookmark link
+    \phantomsection
+    % 写书签 write bookmark
+    \Hy@writebookmark
+    {}
+    {#3}
+    {\@currentHref}
+    {#1}
+    {toc}
+    \artxifstreq{#1}{0}{
+        % set left mark
+        \markboth{\MakeUppercase{#3}}{}
+    }{
+        % set right mark
+        \markright{\MakeUppercase{#3}}
+    }
+}
+% swap starred and non-starred versions
+\newcommand{\intobmk}{\@ifstar{\intobmkstar}{\intobmknostar}}
+% remove line breaks 
+%\newcommand{\rmlbk}[1]{\begingroup\def\\{\relax\ifhmode\unskip\fi\space\ignorespaces}#1\endgroup}
+%===========================================================================%
+%->> 必要的包 Required packages
 %---------------------------------------------------------------------------%
-%->> Required packages
-%---------------------------------------------------------------------------%
 %-
-%-> Math packages
+%-> 数学包 Math packages
 %-
-\RequirePackage{amsmath,amsthm,amssymb}% math structures, theorems, and extended symbols
-\theoremstyle{plain}% for theorems, lemmas, propositions, etc
-\providecommand{\theoremname}{Theorem}%
+% 数学结构、定理和扩展符号 math structures, theorems, and extended symbols
+\RequirePackage{amsmath,amsthm,amssymb}
+% 对于定理、引理、命题等 for theorems, lemmas, propositions, etc
+\theoremstyle{plain}
+\providecommand{\theoremname}{Theorem}
 \newtheorem{theorem}{\theoremname}[\artxmaincnt]
-\providecommand{\axiomname}{Axiom}%
+\providecommand{\axiomname}{Axiom}
 \newtheorem{axiom}[theorem]{\axiomname}
-\providecommand{\lemmaname}{Lemma}%
+\providecommand{\lemmaname}{Lemma}
 \newtheorem{lemma}[theorem]{\lemmaname}
-\providecommand{\corollaryname}{Corollary}%
+\providecommand{\corollaryname}{Corollary}
 \newtheorem{corollary}[theorem]{\corollaryname}
-\providecommand{\assertionname}{Assertion}%
+\providecommand{\assertionname}{Assertion}
 \newtheorem{assertion}[theorem]{\assertionname}
-\providecommand{\propositionname}{Proposition}%
+\providecommand{\propositionname}{Proposition}
 \newtheorem{proposition}[theorem]{\propositionname}
-\providecommand{\conjecturename}{Conjecture}%
+\providecommand{\conjecturename}{Conjecture}
 \newtheorem{conjecture}[theorem]{\conjecturename}
-\theoremstyle{definition}% for definitions and examples
-\providecommand{\definitionname}{Definition}%
+% 定义和示例 for definitions and examples
+\theoremstyle{definition}
+\providecommand{\definitionname}{Definition}
 \newtheorem{definition}{\definitionname}[\artxmaincnt]
-\providecommand{\examplename}{Example}%
+\providecommand{\examplename}{Example}
 \newtheorem{example}{\examplename}[\artxmaincnt]
-\theoremstyle{remark}% for remarks and notes
-\providecommand{\remarkname}{Remark}%
+% 备注和笔记 for remarks and notes
+\theoremstyle{remark}
+\providecommand{\remarkname}{Remark}
 \newtheorem*{remark}{\remarkname}
 
-\ifartx@math% extra math packages
-    \RequirePackage{mathtools}% extension to amsmath
+
+% 额外的数学包 extra math packages
+\ifartx@math
+    % 对 AMS math 的扩展 extension to amsmath
+    \RequirePackage{mathtools}
 \fi
 %-
-%-> Language settings
+%-> 语言设置 Language settings
 %-
-\def\artx@fontdir{./Font/}% extra font location
-\ifartx@pdftex% <pdflatex> call font packages
-    \RequirePackage[utf8]{inputenc}% set input encoding, document must use utf-8 encoding
-    \RequirePackage[T1]{fontenc}% set font encoding to enable modern font encoding
-    %- Text font: English <default: computer modern|others: font packages>
-    \RequirePackage{newtxtext}% main font, <times font: newtxtext|others: palatino>
-    %- Math font: <default: computer modern|others: font packages>
-    \RequirePackage[cmintegrals]{newtxmath}% times font, load after amsmath and newtxtext packages
-    \RequirePackage{mathrsfs}% enable \mathscr for script alphabet
-    \RequirePackage[cal=cm]{mathalfa}% map styles for calligraphic \mathcal and script \mathscr alphabet
-\else% <xelatex> or <lualatex> call system fonts
-    \RequirePackage{fontspec}% support calling system fonts
-    \@ifpackagelater{fontspec}{2016/12/27}{}{%
-        \PackageError{artratex}{fontspec >= 2016/12/27 is required ...}{}%
+% 额外字体位置 extra font location
+\def\artx@fontdir{./Font/}
+% <pdflatex> 调用字体包 call font packages
+\ifartx@pdftex
+    % 设置输入编码，文档必须使用UTF-8编码 set input encoding, document must use utf-8 encoding
+    \RequirePackage[utf8]{inputenc}
+    % 设置字体编码以启用现代字体编码 set font encoding to enable modern font encoding
+    \RequirePackage[T1]{fontenc}
+    %- 文本字体：英语 Text font: English <default: computer modern|others: font packages>
+    % 主要字体 main font, <times font: newtxtext|others: palatino>
+    \RequirePackage{newtxtext}
+    %- 数学字体 Math font: <default: computer modern|others: font packages>
+    % times font, load after amsmath and newtxtext packages
+    \RequirePackage[cmintegrals]{newtxmath}
+    % 为脚本字母表启用\mathscr enable \mathscr for script alphabet
+    \RequirePackage{mathrsfs}
+    % 用于映射书法数学宏和脚本数学宏表的样式 map styles for calligraphic \mathcal and script \mathscr alphabet
+    \RequirePackage[cal=cm]{mathalfa}
+\else
+    % <xelatex> or <lualatex> 调用字体 call system fonts
+    % 调用字体支持 support calling system fonts
+    \RequirePackage{fontspec}
+    \@ifpackagelater{fontspec}{2016/12/27}{}{
+        \PackageError{artratex}{fontspec >= 2016/12/27 is required ...}{}
     }
     %- Font properties: <family:rm|sf|tt> + <weight:lf|md|bf> + <shape:up|it|sl|sc> + <size>
     %- <\rmfamily,\textrm{}|\sffamily,\textsf{}|\ttfamily,\texttt{}>: family of font <Roman|Sans serif|Monospace>, default <\rmfamily>
@@ -346,96 +401,109 @@
     %\RequirePackage[cmintegrals]{newtxmath}% times font, load after amsmath and newtxtext packages
     %\RequirePackage{mathrsfs}% enable \mathscr for script alphabet
     %\RequirePackage[cal=cm]{mathalfa}% map styles for calligraphic \mathcal and script \mathscr alphabet
-    \IfFontExistsTF{XITS-Regular.otf}{%
-    \RequirePackage{unicode-math}% unicode font configuration <XITS|STIX2>
-    \def\boldsymbol#1{\symbfit{#1}}% treat obsoleteness
-    \providecommand{\Vector}[1]{\symbfit{#1}}% general vectors in bold italic
-    \providecommand{\unitVector}[1]{\symbfup{#1}}% unit vectors in bold roman
-    \providecommand{\Matrix}[1]{\symbfup{#1}}% matrix in bold roman
-    \providecommand{\unitMatrix}[1]{\symbfup{#1}}% identity matrix in bold roman
-    \providecommand{\Tensor}[1]{\symbfsfup{#1}}% tensor in sans-serif bold italic
-    \providecommand{\unitTensor}[1]{\symbfsfup{#1}}% identity tensor in sans-serif bold
-    \setmainfont[NFSSFamily=entextrm]{XITS}[
-      Extension      = .otf,
-      UprightFont    = *-Regular,
-      BoldFont       = *-Bold,
-      ItalicFont     = *-Italic,
-      BoldItalicFont = *-BoldItalic,
-      Ligatures=TeX,
-    ]
-    \setsansfont[NFSSFamily=entextsf]{XITS}[
-      Extension      = .otf,
-      UprightFont    = *-Regular,
-      BoldFont       = *-Bold,
-      ItalicFont     = *-Italic,
-      BoldItalicFont = *-BoldItalic,
-      Ligatures=TeX,
-    ]
-    \setmonofont[NFSSFamily=entexttt]{XITS}[
-      Extension      = .otf,
-      UprightFont    = *-Regular,
-      BoldFont       = *-Bold,
-      ItalicFont     = *-Italic,
-      BoldItalicFont = *-BoldItalic,
-      Ligatures=TeX,
-    ]
-    \setmathfont{XITSMath-Regular}[
-      Extension    = .otf,
-      BoldFont     = XITSMath-Bold,
-      Ligatures=TeX,
-      StylisticSet = 1,
-    ]
-    \setmathfont{XITSMath-Regular}[
-      Extension    = .otf,
-      range={cal,bfcal},
-      Ligatures=TeX,
-      StylisticSet = 1,
-    ]
-    \setmathfont{XITSMath-Regular}[
-      Extension    = .otf,
-      range={scr,bfscr},
-      Ligatures=TeX,
-      StylisticSet = 2,
-    ]
-    \setmathrm{XITSMath-Regular}[
-      Extension    = .otf,
-      BoldFont     = XITSMath-Bold,
-      Ligatures=TeX,
-      StylisticSet = 1,
-    ]
-    \setmathsf{XITSMath-Regular}[
-      Extension    = .otf,
-      BoldFont     = XITSMath-Bold,
-      Ligatures=TeX,
-      StylisticSet = 1,
-    ]
-    \setmathtt{XITSMath-Regular}[
-      Extension    = .otf,
-      BoldFont     = XITSMath-Bold,
-      Ligatures=TeX,
-      StylisticSet = 1,
-    ]
-    }{%
-    \RequirePackage{newtxtext}% main font
-    \RequirePackage[cmintegrals]{newtxmath}% times font, load after amsmath and newtxtext packages
-    \RequirePackage{mathrsfs}% enable \mathscr for script alphabet
-    \RequirePackage[cal=cm]{mathalfa}% map styles for calligraphic \mathcal and script \mathscr alphabet
+    \IfFontExistsTF{XITS-Regular.otf}{
+        % unicode字体配置<XITS|STIX2> unicode font configuration <XITS|STIX2>
+        \RequirePackage{unicode-math}
+        % 对待陈旧的东西 treat obsoleteness
+        \def\boldsymbol#1{\symbfit{#1}}
+        % 粗体斜体字中的一般向量 general vectors in bold italic
+        \providecommand{\Vector}[1]{\symbfit{#1}}
+        % 粗体罗马的单位向量 unit vectors in bold roman
+        \providecommand{\unitVector}[1]{\symbfup{#1}}
+        % 粗体罗马矩阵 matrix in bold roman
+        \providecommand{\Matrix}[1]{\symbfup{#1}}
+        % 粗体罗马单位矩阵 identity matrix in bold roman
+        \providecommand{\unitMatrix}[1]{\symbfup{#1}}
+        % 张量无衬线粗体斜体字tensor in sans-serif bold italic
+        \providecommand{\Tensor}[1]{\symbfsfup{#1}}
+        % 无衬线粗体单位张量 identity tensor in sans-serif bold
+        \providecommand{\unitTensor}[1]{\symbfsfup{#1}}
+        \setmainfont[NFSSFamily=entextrm]{XITS}[
+            Extension      = .otf,
+            UprightFont    = *-Regular,
+            BoldFont       = *-Bold,
+            ItalicFont     = *-Italic,
+            BoldItalicFont = *-BoldItalic,
+            Ligatures=TeX,
+        ]
+        \setsansfont[NFSSFamily=entextsf]{XITS}[
+            Extension      = .otf,
+            UprightFont    = *-Regular,
+            BoldFont       = *-Bold,
+            ItalicFont     = *-Italic,
+            BoldItalicFont = *-BoldItalic,
+            Ligatures=TeX,
+        ]
+        \setmonofont[NFSSFamily=entexttt]{XITS}[
+            Extension      = .otf,
+            UprightFont    = *-Regular,
+            BoldFont       = *-Bold,
+            ItalicFont     = *-Italic,
+            BoldItalicFont = *-BoldItalic,
+            Ligatures=TeX,
+        ]
+        \setmathfont{XITSMath-Regular}[
+            Extension    = .otf,
+            BoldFont     = XITSMath-Bold,
+            Ligatures=TeX,
+            StylisticSet = 1,
+        ]
+        \setmathfont{XITSMath-Regular}[
+            Extension    = .otf,
+            range={cal,bfcal},
+            Ligatures=TeX,
+            StylisticSet = 1,
+        ]
+        \setmathfont{XITSMath-Regular}[
+            Extension    = .otf,
+            range={scr,bfscr},
+            Ligatures=TeX,
+            StylisticSet = 2,
+        ]
+        \setmathrm{XITSMath-Regular}[
+            Extension    = .otf,
+            BoldFont     = XITSMath-Bold,
+            Ligatures=TeX,
+            StylisticSet = 1,
+        ]
+        \setmathsf{XITSMath-Regular}[
+            Extension    = .otf,
+            BoldFont     = XITSMath-Bold,
+            Ligatures=TeX,
+            StylisticSet = 1,
+        ]
+        \setmathtt{XITSMath-Regular}[
+            Extension    = .otf,
+            BoldFont     = XITSMath-Bold,
+            Ligatures=TeX,
+            StylisticSet = 1,
+        ]
+    }{
+        % 主要字体 main font
+        \RequirePackage{newtxtext}
+        % 次字体，在amsath和newtxtext包之后加载 times font, load after amsmath and newtxtext packages
+        \RequirePackage[cmintegrals]{newtxmath}
+        % 为脚本字母表启用\mathscr enable \mathscr for script alphabet
+        \RequirePackage{mathrsfs}
+        % 用于映射书法数学宏和脚本数学宏表的样式 map styles for calligraphic \mathcal and script \mathscr alphabet
+        \RequirePackage[cal=cm]{mathalfa}
     }
-    %- Text font: Chinese
-    \ifartx@windows%
-        \setCJKmainfont{SimSun}[AutoFakeBold=2.5,ItalicFont=KaiTi]%
-        \setCJKsansfont{SimHei}[AutoFakeBold=2.5]%
-        \setCJKmonofont{FangSong}%
-    \else\ifartx@mac%
-        \setCJKmainfont{Songti SC}[%
+    %- 文本字体：中文 Text font: Chinese
+    \ifartx@windows
+        \setCJKmainfont{SimSun}[AutoFakeBold=2.5,ItalicFont=KaiTi]
+        \setCJKsansfont{SimHei}[AutoFakeBold=2.5]
+        \setCJKmonofont{FangSong}
+    \else\ifartx@mac
+        \setCJKmainfont{Songti SC}[
             UprightFont    = * Light,
             BoldFont       = * Bold,
             ItalicFont     = Kaiti SC,
             BoldItalicFont = Kaiti SC Bold,
         ]
-        \setCJKsansfont{Heiti SC}[BoldFont = * Medium]%
-        \setCJKmonofont{STFangsong}%
-    \else\ifartx@adobe% call font from system font library
+        \setCJKsansfont{Heiti SC}[BoldFont = * Medium]
+        \setCJKmonofont{STFangsong}
+    % 是否从系统字体库调用字体 call font from system font library
+    \else\ifartx@adobe
         \setCJKmainfont{AdobeSongStd-Light}[%
             AutoFakeBold=2.5,
             ItalicFont=AdobeKaitiStd-Regular,
@@ -444,7 +512,8 @@
             AutoFakeBold=2.5,
         ]%
         \setCJKmonofont{AdobeFangsongStd-Regular}%
-    \else\ifartx@none% call font from local fontdir
+    % 从本地字体目录中调用 call font from local fontdir
+    \else\ifartx@none
     %- Without path: i) if font specified by a string without extension, fontspec will
     %- treat the given string as font name and use system fontconfig to search the font name
     %- in system font library; ii) if font specified by a string with extension, fontspec will
@@ -452,91 +521,110 @@
     %- LaTeX distribution
     %- With path: fontspec will treat the given string as font filename and use kpathsea to
     %- search the font filename in path, and extension is optional but recommended in this case
-        \setCJKmainfont{AdobeSongStd-Light}[%
+        \setCJKmainfont{AdobeSongStd-Light}[
             Path=\artx@fontdir,
             Extension=.otf,
             AutoFakeBold=2.5,
             ItalicFont=AdobeKaitiStd-Regular,
         ]
-        \setCJKsansfont{AdobeHeitiStd-Regular}[%
+        \setCJKsansfont{AdobeHeitiStd-Regular}[
             Path=\artx@fontdir,
             Extension=.otf,
             AutoFakeBold=2.5,
-        ]%
-        \setCJKmonofont{AdobeFangsongStd-Regular}[%
+        ]
+        \setCJKmonofont{AdobeFangsongStd-Regular}[
             Path=\artx@fontdir,
             Extension=.otf,
         ]
     \fi\fi\fi\fi
 \fi
 %-
-%-> Bibliography processor and package
+%-> 书目处理器和包 Bibliography processor and package
 %-
-\def\artxbibref{Biblio/ref.bib}% bibliography reference file
-\def\artxbibtexnum{Biblio/gbt7714-numerical}% bibtex numbers bst
-\def\artxbibtexauy{Biblio/gbt7714-author-year}% bibtex authoryear bst
-\def\artxbibtexalp{alpha}% bibtex alpha bst
-\def\artxbibernum{Biblio/gb7714-2015}% biber numbers bst
-\def\artxbiberauy{Biblio/gb7714-2015ay}% biber authoryear bst
-\def\artxbiberalp{alphabetic}% biber alpha bst
+% 书目参考文件 bibliography reference file
+\def\artxbibref{Biblio/ref.bib}
+% bibtex numbers bst
+\def\artxbibtexnum{Biblio/gbt7714-numerical}
+% bibtex authoryear bst
+\def\artxbibtexauy{Biblio/gbt7714-author-year}
+% bibtex alpha bst
+\def\artxbibtexalp{alpha}
+% biber numbers bst
+\def\artxbibernum{Biblio/gb7714-2015}
+% biber authoryear bst
+\def\artxbiberauy{Biblio/gb7714-2015ay}
+% biber alpha bst
+\def\artxbiberalp{alphabetic}
 %- Bibtex processor + natbib package
 \ifartx@bibtex%
-    % Set punctuation and mode of citation style
-    \newcommand{\bibstyle@super}{\bibpunct{[}{]}{,}{s}{,}{\textsuperscript{,}}}%
-    \newcommand{\bibstyle@numbers}{\bibpunct{[}{]}{,}{n}{,}{,}}%
-    \newcommand{\bibstyle@authoryear}{\bibpunct{(}{)}{;}{a}{,}{,}}%
-    \newcommand{\bibstyle@alpha}{\bibpunct{[}{]}{,}{n}{,}{,}}%
-    \ifartx@numbers% enable numbered citation style
-        \RequirePackage[sort&compress]{natbib}% numbered citation mode
-        \ifartx@super% enable superscripted citation style
-            \citestyle{super}%
+    % 设置标点符号和引文样式模式 Set punctuation and mode of citation style
+    \newcommand{\bibstyle@super}{\bibpunct{[}{]}{,}{s}{,}{\textsuperscript{,}}}
+    \newcommand{\bibstyle@numbers}{\bibpunct{[}{]}{,}{n}{,}{,}}
+    \newcommand{\bibstyle@authoryear}{\bibpunct{(}{)}{;}{a}{,}{,}}
+    \newcommand{\bibstyle@alpha}{\bibpunct{[}{]}{,}{n}{,}{,}}
+    % 启用编号引用样式 enable numbered citation style
+    \ifartx@numbers
+        \RequirePackage[sort&compress]{natbib}
+        % 是否启用上标引文样式
+        \ifartx@super
+            \citestyle{super}
         \else
-            \citestyle{numbers}%
+            \citestyle{numbers}
         \fi
-        \bibliographystyle{\artxbibtexnum}% numbered scheme
+        \bibliographystyle{\artxbibtexnum}
     \fi
-    \ifartx@authoryear% enable author year citation style
-        \RequirePackage{natbib}% author year citation mode
-        \citestyle{authoryear}%
-        \bibliographystyle{\artxbibtexauy}% author year scheme
+    % 启用 作者-年份 引用样式 enable author year citation style
+    \ifartx@authoryear
+        \RequirePackage{natbib}
+        \citestyle{authoryear}
+        \bibliographystyle{\artxbibtexauy}
     \fi
-    \ifartx@alpha% enable alpha citation style
+    % 是否启用alpha引用样式  enable alpha citation style
+    \ifartx@alpha
         \RequirePackage[square,comma,numbers]{natbib}% alpha citation mode
         \bibliographystyle{\artxbibtexalp}% alpha scheme
     \fi
-    \providecommand*{\citetns}[2][]{% text embedded \citet in superscripted mode
+    % 上标模式下的文本嵌入（\citet）年  text embedded \citet in superscripted mode
+    \providecommand*{\citetns}[2][]{
         \begingroup\citestyle{numbers}\citet[#1]{#2}\endgroup%
     }
-    \providecommand*{\citepns}[2][]{% text embedded \citep in superscripted mode
+    % 上标模式下的文本嵌入（\citep）作者年 text embedded \citep in superscripted mode
+    \providecommand*{\citepns}[2][]{
         \begingroup\citestyle{numbers}\citep[#1]{#2}\endgroup%
     }
 \fi
-%- Biber processor + biblatex package
+%- Biber处理器和biblatex包 Biber processor + biblatex package
 \ifartx@biber%
-    \AtEndPreamble{\RequirePackage{hyperref}}% enable biblatex detection of hyperref
-    \ifartx@numbers% enable numbered citation style
-        \ifartx@super% enable superscripted citation style
-            \RequirePackage[backend=biber,style=\artxbibernum,mincitenames=1,maxcitenames=2]{biblatex}%
+    % 启用超参的biblatex检测 enable biblatex detection of hyperref
+    \AtEndPreamble{\RequirePackage{hyperref}}
+    % 是否启用编号引用样式 enable numbered citation style
+    \ifartx@numbers
+        % 是否启用上标引文样式
+        \ifartx@super
+            \RequirePackage[backend=biber,style=\artxbibernum,mincitenames=1,maxcitenames=2]{biblatex}
         \else
-            \RequirePackage[backend=biber,style=\artxbibernum,mincitenames=1,maxcitenames=2]{biblatex}%
-            \renewrobustcmd*{\citet}{\textcite}%
-            \renewrobustcmd*{\citep}{\parencite}%
+            \RequirePackage[backend=biber,style=\artxbibernum,mincitenames=1,maxcitenames=2]{biblatex}
+            \renewrobustcmd*{\citet}{\textcite}
+            \renewrobustcmd*{\citep}{\parencite}
         \fi
     \fi
-    \ifartx@authoryear% enable author year citation style
-        \RequirePackage[backend=biber,style=\artxbiberauy,mincitenames=1,maxcitenames=2]{biblatex}%
-            \renewrobustcmd*{\citet}{\textcite}%
-            \renewrobustcmd*{\citep}{\parencite}%
+    % 是否启用作者年份引用样式 enable author year citation style
+    \ifartx@authoryear
+        \RequirePackage[backend=biber,style=\artxbiberauy,mincitenames=1,maxcitenames=2]{biblatex}
+            \renewrobustcmd*{\citet}{\textcite}
+            \renewrobustcmd*{\citep}{\parencite}
     \fi
-    \ifartx@alpha% enable alpha citation style
-        \RequirePackage[backend=biber,style=\artxbiberalp]{biblatex}%
+    % 是否启用alpha引用样式 enable alpha citation style
+    \ifartx@alpha
+        \RequirePackage[backend=biber,style=\artxbiberalp]{biblatex}
     \fi
-    \addbibresource{\artxbibref}%
-    \providecommand{\citep}[1]{\parencite{#1}}% compatibility
-    \providecommand{\citet}[1]{\textcite{#1}}% compatibility
-    \providecommand{\bibetal}{et al.}% compatibility
-    \providecommand{\biband}{and}% compatibility
-    \DefineBibliographyStrings{english}{%
+    \addbibresource{\artxbibref}
+    % 兼容 compatibility
+    \providecommand{\citep}[1]{\parencite{#1}}
+    \providecommand{\citet}[1]{\textcite{#1}}
+    \providecommand{\bibetal}{et al.}
+    \providecommand{\biband}{and}
+    \DefineBibliographyStrings{english}{
         andincite         = {\biband},
         andothersincite   = {\bibetal{}},
         andincitecn       = {\biband},
@@ -544,54 +632,73 @@
     }
 \fi
 %-
-%-> Figure environment support
+%-> 图环境支持 Figure environment support
 %-
-\RequirePackage{graphicx}% packages for including graphics
-\RequirePackage[format=plain,hangindent=2.0em,font={small,bf},skip=8pt,labelsep=space]{caption}% options: [margin=10pt,labelfont=bf]
-\RequirePackage{subcaption}% package for subfigures
-\RequirePackage[list=off]{bicaption}% package for binary captions
-\DeclareCaptionOption{bi-first}[]{}% 1st language
-\DeclareCaptionOption{bi-second}[]{% 2nd language
-    \def\tablename{Table}%
-    \def\figurename{Figure}%
+% 包含图形的软件包 packages for including graphics
+\RequirePackage{graphicx}
+% 选项 options: [margin=10pt,labelfont=bf]
+\RequirePackage[format=plain,hangindent=2.0em,font={small,bf},skip=8pt,labelsep=space]{caption}
+% 子图形包 package for subfigures
+\RequirePackage{subcaption}
+% 两行标题包 package for binary captions
+\RequirePackage[list=off]{bicaption}
+% 第一语言 1st language
+\DeclareCaptionOption{bi-first}[]{}
+% 第二语言 2nd language
+\DeclareCaptionOption{bi-second}[]{
+    \def\tablename{Table}
+    \def\figurename{Figure}
 }
-\captionsetup[bi-first]{bi-first}%
-\captionsetup[bi-second]{bi-second}%
-\RequirePackage[section]{placeins}% prevent floats from being moved over section
+\captionsetup[bi-first]{bi-first}
+\captionsetup[bi-second]{bi-second}
+% 防止浮标在部分上移动 prevent floats from being moved over section
+\RequirePackage[section]{placeins}
 %-
-%-> Page layout and spacing
+%-> 页面布局和间距 Page layout and spacing
 %-
-\ifartx@geometry% enable geometry to redefine page layout
-    \RequirePackage{geometry}% page layout
-    %\RequirePackage{setspace}% line spacing
+% 是否启用几何重新定义页面布局 enable geometry to redefine page layout
+\ifartx@geometry
+    % 页面布局 page layout
+    \RequirePackage{geometry}
+    % 行间距 line spacing
+    %\RequirePackage{setspace}
 \fi
-\ifartx@lscape% landscape layout
-    \RequirePackage{fancyhdr}% fancy headers and footers
-    %- usage: \begin{landscape} [\thispagestyle{lscape}] text... \end{landscape}
-    \RequirePackage{pdflscape}% landscape environment
-    \RequirePackage[absolute]{textpos}% rotated page number
+% 是否横向布局 landscape layout
+\ifartx@lscape
+    % 自定义的页眉和页脚 fancy headers and footers
+    \RequirePackage{fancyhdr}
+    %- 用法 usage: \begin{landscape} [\thispagestyle{lscape}] text... \end{landscape}
+    % 横向布局环境 landscape environment
+    \RequirePackage{pdflscape}
+    % 轮换页码 rotated page number
+    \RequirePackage[absolute]{textpos}
 \fi
-\ifartx@xhf% header and footer style
-    \RequirePackage{fancyhdr}% fancy headers and footers
+% 是否页面和页脚样式 header and footer style
+\ifartx@xhf
+    % 自定义的页眉和页脚 fancy headers and footers
+    \RequirePackage{fancyhdr}
 \fi
 %\RequirePackage{microtype}% improves general appearance of the text
 %-
-%-> Color
+%-> 颜色 Color
 %-
-\ifartx@color% enable color package to use color
-    %\RequirePackage{color}%
-    \RequirePackage[usenames,dvipsnames,table]{xcolor}%
+% 是否开启颜色包来支持颜色 enable color package to use color
+\ifartx@color
+    %\RequirePackage{color}
+    \RequirePackage[usenames,dvipsnames,table]{xcolor}
 \fi
 \usepackage{lipsum}
 \usepackage{tcolorbox}
-% 引入 breakable 库
+% 引入 breakable 库以支持场表格跨页
 \tcbuselibrary{breakable} 
 %-
-%-> Draw graphics directly with TeX commands
+%-> 直接使用TeX命令绘制图形 Draw graphics directly with TeX commands
 %-
-\ifartx@tikz%
-    \RequirePackage{tikz}% automatically load pgf package
-    \usetikzlibrary{% load libraries
+\ifartx@tikz
+    % 自动加载pgf包 automatically load pgf package
+    \RequirePackage{tikz}
+    % 加载库 load libraries
+    \usetikzlibrary{
         positioning,
         arrows,
         calc,
@@ -599,59 +706,92 @@
     }%
 \fi
 %-
-%-> Complex tables
+%-> 复杂表格 Complex tables
 %-
 \ifartx@table%
-    \RequirePackage{ctable,multirow}% imports the array, tabularx, booktabs and multirow packages
+    % 引入array，tabularx，booktabs和multirow包  imports the array, tabularx, booktabs and multirow packages
+    \RequirePackage{ctable,multirow}
 \fi
 %-
-%-> List structures
+%-> 列表结构 List structures
 %-
-\ifartx@list% enable enhanced list and verbatim structures
-    \RequirePackage{verbatim}% improve verbatim environment
-    \RequirePackage{enumitem}% configure the enumerate environment
-    \setlist[enumerate]{wide=\parindent}% only indent the first line
-    \setlist[itemize]{wide=\parindent}% only indent the first line
-    \setlist{nosep}% default text spacing
-    \RequirePackage{listings}% source code
-    \RequirePackage{algpseudocode,algorithm,algorithmicx}% algorithm
-    \providecommand{\algname}{Algorithm}%
-    \def\ALG@name{\algname}% rename label
+% 是否启用增强的列表和逐字结构 enable enhanced list and verbatim structures
+\ifartx@list
+    % 改善逐字环境 improve verbatim environment
+    \RequirePackage{verbatim}
+    % 配置枚举环境 configure the enumerate environment
+    \RequirePackage{enumitem}
+    % 有序列表只缩进第一行 only indent the first line
+    \setlist[enumerate]{wide=\parindent}%
+    % 无序列表只缩进第一行 only indent the first line
+    \setlist[itemize]{wide=\parindent}%
+    % 默认的文本间距 default text spacing
+    \setlist{nosep}
+    % 源代码 source code
+    \RequirePackage{listings}
+    % 算法 algorithm
+    \RequirePackage{algpseudocode,algorithm,algorithmicx}
+    \providecommand{\algname}{Algorithm}
+    % 重命名标签 rename label
+    \def\ALG@name{\algname}
 \fi
 %-
-%-> Link support
+%-> 链接支持 Link support
 %-
-\AtEndPreamble{%
-    \RequirePackage{hyperref}% load at last
-    \hypersetup{% set hyperlinks
-        pdfencoding=auto,% allows non-Latin based languages in bookmarks
-        psdextra=true,% extra support for math symbols in bookmarks
-        %bookmarks=true,% show bookmarks bar
-        bookmarksnumbered=true,% put section numbers in bookmarks
-        pdftitle={\@title},% title
-        pdfauthor={\@author},% author
-        pdfsubject={\@title},% subject
-        %pdftoolbar=true,% show toolbar
-        %pdfmenubar=true,% show menu
-        pdffitwindow=false,% window fit to page when opened
-        pdfstartview={FitH},% fits the width of the page to the window
-        %pdfnewwindow=true,% links in new window
-        %backref=true,% do bibliographical back references
+\AtEndPreamble{
+    % 最后加载 load at last
+    \RequirePackage{hyperref}
+    % 设置超链接 set hyperlinks
+    \hypersetup{
+        % 允许书签中使用非拉丁语语言 allows non-Latin based languages in bookmarks
+        pdfencoding=auto,
+        % 对书签中数学符号的额外支持 extra support for math symbols in bookmarks
+        psdextra=true,
+        % 显示书签栏 show bookmarks bar
+        bookmarks=true,
+        % 将部分编号放入书签中 put section numbers in bookmarks
+        bookmarksnumbered=true,
+        % 标题 title
+        pdftitle={\@title},
+        % 作者 author
+        pdfauthor={\@author},
+        % 主题 subject
+        pdfsubject={\@title},
+        % 显示工具栏 show toolbar
+        %pdftoolbar=true,
+        % 显示菜单 show menu
+        %pdfmenubar=true,
+        % 窗口打开时适合页面 window fit to page when opened
+        pdffitwindow=false,
+        % 使页面的宽度适合窗口 fits the width of the page to the window
+        pdfstartview={FitH},
+        % 新窗口中的链接 links in new window
+        %pdfnewwindow=true,
+        % 做参考书目 do bibliographical back references
+        %backref=true,
         %pagebackref=true,% backreference by page number
-        colorlinks=true,% false: boxed links; true: colored links
-        linkcolor=black,% color of internal links
-        citecolor=blue,% color of links to bibliography
-        filecolor=blue,% color of file links
-        urlcolor=blue,% color of external links
+        % false: 边框链接 boxed links; true: 颜色链接 colored links
+        colorlinks=true,
+        % 内部链接颜色 color of internal links
+        linkcolor=black,
+        % 参考书目链接的颜色 color of links to bibliography
+        citecolor=blue,
+        % 文件链接颜色 color of file links
+        filecolor=blue,
+        % 外部链接颜色 color of external links
+        urlcolor=blue,
     }
-    \ifartx@xlink% set link color to black
-        \hypersetup{% set hyperlinks
-            hidelinks,% remove link color and border
+    % 是否将链接颜色设置为黑色 set link color to black
+    \ifartx@xlink
+        % 设置超链接 set hyperlinks
+        \hypersetup{
+            % 删除链接颜色和边框 remove link color and border
+            hidelinks,
         }
     \fi
 }
-%---------------------------------------------------------------------------%
-%->> Configuration command
+%===========================================================================%
+%->> 设置命令 Configuration command
 %---------------------------------------------------------------------------%
 %-
 %-> Extensions and directories for graphics
@@ -659,17 +799,21 @@
 %- Declare graphic extensions for automatic selection when including graphics
 %- via avoiding supplying graphic extensions in \includegraphics command,
 %- the source file can be more general and adaptive
-\ifartx@xetex%
-    \DeclareGraphicsExtensions{.pdf,.png,.jpg,.eps,.tif,.bmp,.gif}%
-\else% <pdflatex> or <lualatex>
-    \DeclareGraphicsExtensions{.pdf,.png,.jpg}%
+\ifartx@xetex
+    \DeclareGraphicsExtensions{.pdf,.png,.jpg,.eps,.tif,.bmp,.gif}
+% <pdflatex> or <lualatex>
+\else
+    \DeclareGraphicsExtensions{.pdf,.png,.jpg}
 \fi
-\graphicspath{{Image/}}% search path for figures
+
+% 在指定目录下寻找图片 search path for figures
+\graphicspath{{Image/}}
 %-
-%-> Layout, space, and style
+%-> 布局，间距和样式  Layout, space, and style
 %-
-\ifartx@geometry% enable geometry to redefine page layout
-    \geometry{paper=a4paper,left=31.7mm,right=31.7mm,top=25.4mm,bottom=25.4mm,headheight=12pt,headsep=17.5pt,footskip=10.4mm}%
+% 是否启用几何重新定义页面布局 enable geometry to redefine page layout
+\ifartx@geometry
+    \geometry{paper=a4paper,left=31.7mm,right=31.7mm,top=25.4mm,bottom=25.4mm,headheight=12pt,headsep=17.5pt,footskip=10.4mm}
 \fi
 \linespread{1.5}% 1.5 for "one and a half" line spacing, and 2.0 for "double" line spacing
 %\setlength{\parskip}{0.5ex plus 0.25ex minus 0.25ex}% skip space a paragraph
@@ -683,14 +827,18 @@
 % \numberwithin{table}{section}% set enumeration level
 % \renewcommand{\thetable}{\thesection\arabic{table}}% configure the label style
 %- Set bibliography entry
-\ifartx@bibtex%
-    \setlength{\bibsep}{0.0ex plus 0.2ex minus 0.2ex}% set distance between entries
+\ifartx@bibtex
+    % 设置条目之间的距离 set distance between entries
+    \setlength{\bibsep}{0.0ex plus 0.2ex minus 0.2ex}
 \fi
 \ifartx@biber%
-    %\setlength\bibitemsep{0.5\baselineskip}% set distance between entries
-    \setlength\bibitemsep{0.0ex plus 0.2ex minus 0.2ex}% set distance between entrie
+    % 设置条目之间的距离 set distance between entries
+    %\setlength\bibitemsep{0.5\baselineskip}
+    % 设置入口之间的距离 set distance between entrie
+    \setlength\bibitemsep{0.0ex plus 0.2ex minus 0.2ex}
 \fi
-\renewcommand*{\bibfont}{\small}% set font size for bibliography
+% 设置参考书目的字体大小 set font size for bibliography
+\renewcommand*{\bibfont}{\small}
 %-
 %-> Page header and footer Style
 %-
@@ -698,8 +846,9 @@
 %- These headers/footers typically contain document titles, chapter
 %- or section numbers/names, and page numbers.
 %- Configure fancy style
-\ifartx@xhf% user defined header and footer style
-    \pagestyle{fancy}%
+% 是否使用用户定义的页眉和页脚样式 user defined header and footer style
+\ifartx@xhf
+    \pagestyle{fancy}
     %- customizing headers and footers in LaTeX is a two-stage process
     %- 1) \chapter|section call \chapter|sectionmark that call \markboth|right to define \left|rightmark
     %-    but \chapter*|section* do not call \chapter|sectionmark, then manually call \markboth|right is needed to update \left|rightmark
@@ -712,74 +861,106 @@
     %\renewcommand{\chaptermark}[1]{\markboth{\MakeUppercase{#1}}{}}%
     %\renewcommand{\sectionmark}[1]{\markright{\MakeUppercase{#1}}{}}%
     %- Deactivate uppercase effect
-    \renewcommand{\MakeUppercase}[1]{#1}%
-    %- Define different kinds of header and footer for different parts
-    \fancypagestyle{frontmatterstyle}{% style for frontmatter
-        \fancyhf{}% clear fields
-        \fancyhead[C]{\footnotesize \ifnumodd{\value{page}}{\leftmark}{\@title}}% structure elements
-        \fancyfoot[C]{\footnotesize \thepage}% page number
-        \renewcommand{\headrulewidth}{0.8pt}% header rule
-        \renewcommand{\footrulewidth}{0pt}% footer rule
+    \renewcommand{\MakeUppercase}[1]{#1}
+    %- 为不同的部分定义不同类型的页眉和页脚 Define different kinds of header and footer for different parts
+    \fancypagestyle{frontmatterstyle}{
+        % 清除区域 clear fields
+        \fancyhf{}
+        % 结构元素 structure elements
+        \fancyhead[C]{\footnotesize \ifnumodd{\value{page}}{\leftmark}{\@title}} % FIXME
+        % 页面编号 page number
+        \fancyfoot[C]{\footnotesize \thepage}
+        % 页眉规范 header rule
+        \renewcommand{\headrulewidth}{0.8pt}
+        % 页脚规范 footer rule
+        \renewcommand{\footrulewidth}{0pt}
     }
     \fancypagestyle{enfrontmatterstyle}{% TODO style for frontmatter
-    \fancyhf{}% clear fields
-    \fancyhead[C]{\footnotesize \ifnumodd{\value{page}}{\leftmark}{\ZHKU@value@en@title}}% structure elements
-    \fancyfoot[C]{\footnotesize \thepage}% page number
-    \renewcommand{\headrulewidth}{0.8pt}% header rule
-    \renewcommand{\footrulewidth}{0pt}% footer rule
+    % 清除区域 clear fields
+    \fancyhf{}
+    % 结构元素 structure elements
+    \fancyhead[C]{\footnotesize \ifnumodd{\value{page}}{\leftmark}{\ZHKU@value@en@title}}
+    % 页面编号 page number
+    \fancyfoot[C]{\footnotesize \thepage}
+    % 页眉规范 header rule
+    \renewcommand{\headrulewidth}{0.8pt}
+    % 页脚规范 footer rule
+    \renewcommand{\footrulewidth}{0pt}
     }
 
-    \fancypagestyle{mainmatterstyle}{% style for mainmatter
-        \fancyhf{}% clear fields
-        \fancyhead[C]{\footnotesize \ifnumodd{\value{page}}{\leftmark}{\@title}}% structure elements
-        \fancyfoot[C]{\footnotesize \ifnumodd{\value{page}}{\hspace*{\fill}\thepage}{\thepage\hspace*{\fill}}}% page number
-        \renewcommand{\headrulewidth}{0.8pt}% header rule
-        \renewcommand{\footrulewidth}{0pt}% footer rule
+    \fancypagestyle{mainmatterstyle}{
+        % 清除区域 clear fields
+        \fancyhf{}
+        % 结构元素 structure elements
+        \fancyhead[C]{\footnotesize \ifnumodd{\value{page}}{\leftmark}{\@title}}
+        % 页面编号 page number
+        \fancyfoot[C]{\footnotesize \ifnumodd{\value{page}}{\hspace*{\fill}\thepage}{\thepage\hspace*{\fill}}}
+        % 页眉规范 header rule
+        \renewcommand{\headrulewidth}{0.8pt}
+        % 页脚规范 footer rule
+        \renewcommand{\footrulewidth}{0pt}
     }
-    \fancypagestyle{backmatterstyle}{% header and footer style for backmatter
-        \fancyhf{}% clear fields
-        \fancyhead[C]{\footnotesize \ifnumodd{\value{page}}{\leftmark}{\@title}}% structure elements
-        \fancyfoot[C]{\footnotesize \ifnumodd{\value{page}}{\hspace*{\fill}\thepage}{\thepage\hspace*{\fill}}}% page number
-        \renewcommand{\headrulewidth}{0.8pt}% header rule
-        \renewcommand{\footrulewidth}{0pt}% footer rule
+    \fancypagestyle{backmatterstyle}{
+        % 清除区域 clear fields
+        \fancyhf{}
+        % 结构元素 structure elements
+        \fancyhead[C]{\footnotesize \ifnumodd{\value{page}}{\leftmark}{\@title}}
+        % 页面编号 page number
+        \fancyfoot[C]{\footnotesize \ifnumodd{\value{page}}{\hspace*{\fill}\thepage}{\thepage\hspace*{\fill}}}
+        % 页眉规范 header rule
+        \renewcommand{\headrulewidth}{0.8pt}
+        % 页脚规范 footer rule
+        \renewcommand{\footrulewidth}{0pt}
     }
-    %- Redefine \frontmatter to include the change
-    \providecommand{\frontmatter}{}% compatibility for non-book classes
-    \let\artxfrontmatter\frontmatter%
-    \renewcommand{\frontmatter}{%
-        \artxfrontmatter%
-        \pagestyle{frontmatterstyle}%
+    %- 重定义\frontmatter使包括更改 Redefine \frontmatter to include the change
+    % 对非书类的兼容 compatibility for non-book classes
+    \providecommand{\frontmatter}{}
+    \let\artxfrontmatter\frontmatter
+    \renewcommand{\frontmatter}{
+        \artxfrontmatter
+        \pagestyle{frontmatterstyle}
     }
-    %- Redefine \mainmatter to include the change
-    \providecommand{\mainmatter}{}% compatibility for non-book classes
-    \let\artxmainmatter\mainmatter%
-    \renewcommand{\mainmatter}{%
-        \artxmainmatter%
-        \pagestyle{mainmatterstyle}%
+    %- 重定义\mainmatter使包括更改 Redefine \mainmatter to include the change
+    % 对非书类的兼容 compatibility for non-book classes
+    \providecommand{\mainmatter}{}
+    \let\artxmainmatter\mainmatter
+    \renewcommand{\mainmatter}{
+        \artxmainmatter
+        \pagestyle{mainmatterstyle}
     }
-    %- Redefine \backmatter to include the change
-    \providecommand{\backmatter}{}% compatibility for non-book classes
-    \let\artxbackmatter\backmatter%
-    \renewcommand{\backmatter}{%
-        \artxbackmatter%
-        \pagestyle{backmatterstyle}%
+    %- 重定义\backmatter使包括更改 Redefine \backmatter to include the change
+    % 对非书类的兼容 compatibility for non-book classes
+    \providecommand{\backmatter}{}
+    \let\artxbackmatter\backmatter
+    \renewcommand{\backmatter}{
+        \artxbackmatter
+        \pagestyle{backmatterstyle}
     }
     %- Some Latex commands, like \chapter, use the \thispagestyle command
     %- to automatically switch to the plain page style, thus ignoring the
     %- page style currently in effect. To customize such pages you must
     %- redefine the plain pagestyle. If you want the plain style inherits
     %- the current style, comment all the lines in plain style definition.
-    \fancypagestyle{plain}{%
-        \fancyhf{}% clear fields
-        \renewcommand{\headrulewidth}{0pt}% header rule
-        \renewcommand{\footrulewidth}{0pt}% footer rule
+    \fancypagestyle{plain}{
+        % 清除区域 clear fields
+        \fancyhf{}
+        % 页眉规范 header rule
+        \renewcommand{\headrulewidth}{0pt}
+        % 页脚规范 footer rule
+        \renewcommand{\footrulewidth}{0pt}
     }
-    \fancypagestyle{noheaderstyle}{% header and footer style for no header
-        \fancyhf{}% clear fields
-        %\fancyhead[C]{\footnotesize \ifnumodd{\value{page}}{\leftmark}{\@title}}% structure elements
-        \fancyfoot[C]{\footnotesize \ifnumodd{\value{page}}{\hspace*{\fill}\thepage}{\thepage\hspace*{\fill}}}% page number
-        \renewcommand{\headrulewidth}{0pt}% header rule
-        \renewcommand{\footrulewidth}{0pt}% footer rule
+    % 没有页眉但有页尾的样式 header and footer style for no header
+    \fancypagestyle{noheaderstyle}{
+        % 清除区域 clear fields
+        \fancyhf{}
+        % 结构元素 structure elements
+        %\fancyhead[C]{\footnotesize \ifnumodd{\value{page}}{\leftmark}{\@title}}
+        % 页面编号 page number
+        \fancyfoot[C]{\footnotesize \ifnumodd{\value{page}}{\hspace*{\fill}\thepage}{\thepage\hspace*{\fill}}}
+        % 页眉规范 header rule
+        \renewcommand{\headrulewidth}{0pt}
+        % 页脚规范 footer rule
+        \renewcommand{\footrulewidth}{0pt}
     }
 \fi
 %-
@@ -826,36 +1007,60 @@
 }
 \fi
 %-
-%-> Configure list environment
+%-> 设置列表环境 Configure list environment
 %-
-\ifartx@list% enable enhanced list
+% 是否增强列表 enable enhanced list
+\ifartx@list
     \definecolor{artxgreen}{rgb}{0,0.6,0}
     \definecolor{artxgray}{rgb}{0.5,0.5,0.5}
     \definecolor{artxmauve}{rgb}{0.58,0,0.82}
-    \lstset{%
-        numberbychapter=false,% numbered sequentially or by chapter
-        backgroundcolor=\color{white},% background color;
-        basicstyle=\scriptsize,% font size for code
-        breakatwhitespace=false,% sets if automatic breaks should only happen at whitespace
-        breaklines=true,% sets automatic line breaking
-        captionpos=b,% caption-position to bottom
-        commentstyle=\color{artxgreen},% comment style
-        %deletekeywords={...},% delete keywords from the given language
-        frame=single,% adds a frame around the code
-        keepspaces=true,% keeps spaces in text for keeping indentation of code
-        keywordstyle=\color{blue},% keyword style
-        %otherkeywords={*,...},% add more keywords to the set
-        numbers=left,% where to put the line-numbers; possible values are (none, left, right)
-        numbersep=5pt,% how far the line-numbers are from the code
-        numberstyle=\tiny\color{artxgray},% the style that is used for the line-numbers
-        rulecolor=\color{black},% if not set, the frame-color may be changed on line-breaks
-        showspaces=false,% show spaces everywhere adding particular underscores;
-        showstringspaces=false,% underline spaces within strings only
-        showtabs=false,% show tabs within strings adding particular underscores
-        stepnumber=2,% the step between two line-numbers. If it's 1, each line will be numbered
-        stringstyle=\color{artxmauve},% string literal style
-        tabsize=2,% sets default tabsize to 2 spaces
-        title=\lstname% show the filename of files
+    \lstset{
+        % 按章节顺序编号的 numbered sequentially or by chapter
+        numberbychapter=false,
+        % 背景颜色background color
+        backgroundcolor=\color{white},
+        % 代码的字体大小 font size for code
+        basicstyle=\scriptsize,
+        % 如果自动中断应该只发生在空格处，则设置 sets if automatic breaks should only happen at whitespace
+        breakatwhitespace=false,
+        % 设置自动断线 sets automatic line breaking
+        breaklines=true,
+        % 字幕位置到底部 caption-position to bottom
+        captionpos=b,
+        % 评论风格 comment style
+        commentstyle=\color{artxgreen},
+        % 从给定的语言中删除关键字 delete keywords from the given language
+        %deletekeywords={...},
+        % 在代码周围添加一个框架 adds a frame around the code
+        frame=single,
+        % 在文本中保留空格以保持代码缩进 keeps spaces in text for keeping indentation of code
+        keepspaces=true,
+        % 关键词风格 keyword style
+        keywordstyle=\color{blue},
+        % 向集合中添加更多关键字 add more keywords to the set
+        %otherkeywords={*,...},
+        % 行号放在哪里，可以设置(none, left, right) where to put the line-numbers; possible values are (none, left, right)
+        numbers=left,
+        % 行号离代码有多远 how far the line-numbers are from the code
+        numbersep=5pt,
+        % 用于行号的样式 the style that is used for the line-numbers
+        numberstyle=\tiny\color{artxgray},
+        % 如果未设置，则可以在换行符时更改框架颜色 if not set, the frame-color may be changed on line-breaks
+        rulecolor=\color{black},
+        % 到处显示空格，添加特定的下划线； show spaces everywhere adding particular underscores;
+        showspaces=false,
+        % 仅在字符串中下划线空格 underline spaces within strings only
+        showstringspaces=false,
+        % 在添加特定下划线的字符串中显示制表符 show tabs within strings adding particular underscores
+        showtabs=false,
+        % 两个行号之间的步骤。如果是1，每行都将被编号 the step between two line-numbers. If it's 1, each line will be numbered
+        stepnumber=2,
+        % 字符串文字样式 string literal style
+        stringstyle=\color{artxmauve},
+        % 将默认制表符大小设置为2个空格 sets default tabsize to 2 spaces
+        tabsize=2,
+        % 显示文件的文件名 show the filename of files
+        title=\lstname
     }
 \fi
 %-
@@ -877,6 +1082,6 @@
 \renewcommand{\listfigurename}{\ZHKU@label@ch@lsfigname}
 \renewcommand{\listtablename}{\ZHKU@label@ch@lstabname}
 \makeatother
-%---------------------------------------------------------------------------%
+%===========================================================================%
 \endinput
 
