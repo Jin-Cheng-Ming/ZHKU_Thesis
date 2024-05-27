@@ -20,8 +20,41 @@
 ```
 
 - [gb7714-2015.bbx](https://github.com/hushidong/biblatex-gb7714-2015)
+
+```tex
+%% ---------------------------------------------------------------
+%% biblatex-gb7714-2015 --- A biblatex implementation of the
+%% GBT7714-2015  bibliography style,numerical sequence
+%% Maintained by huzhenzhen
+%% E-mail: hzzmail@163.com
+%% Released under the LaTeX Project Public License v1.3c or later
+%% ---------------------------------------------------------------
+```
+
 - [gb7714-2015.cbx](https://github.com/hushidong/biblatex-gb7714-2015)
+
+```tex
+%% ---------------------------------------------------------------
+%% biblatex-gb7714-2015 --- A biblatex implementation of the
+%% GBT7714-2015 citation style,numerical sequence
+%% Maintained by huzhenzhen
+%% E-mail: hzzmail@163.com
+%% Released under the LaTeX Project Public License v1.3c or later
+%% ---------------------------------------------------------------
+```
+
 - [gb7714-2015ay.bbx](https://github.com/hushidong/biblatex-gb7714-2015)
+
+```tex
+%% ---------------------------------------------------------------
+%% biblatex-gb7714-2015 --- A biblatex implementation of the
+%% GBT7714-2015  bibliography style,author year sequence
+%% Maintained by huzhenzhen
+%% E-mail: hzzmail@163.com
+%% Released under the LaTeX Project Public License v1.3c or later
+%% ---------------------------------------------------------------
+```
+
 - [gb7714-2015ay.cbx](https://github.com/hushidong/biblatex-gb7714-2015)
 
 ```tex
@@ -33,6 +66,8 @@
 %% Released under the LaTeX Project Public License v1.3c or later
 %% ---------------------------------------------------------------
 ```
+
+## GNU General Public License
 
 - [ucasthesis](https://github.com/mohuangrui/ucasthesis)
 
