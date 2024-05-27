@@ -192,6 +192,11 @@
 \newcommand{\classificationCode}[1] {\def\ZHKU@value@ch@classificationCode{#1}}
 \newcommand{\confidential}[1]       {\def\ZHKU@value@ch@confidential{#1}}
 \newcommand{\schoolLogo}[2][]       {\def\ZHKU@value@ch@schoolLogo{\includegraphics[#1]{#2}}}
+\renewcommand{\title}[2][\ZHKU@value@ch@title]{
+                                      \def\ZHKU@value@ch@title{#2}
+                                      %\def\ZHKU@value@ch@titlemark{\MakeUppercase{#1}}}
+                                      \def\ZHKU@value@ch@titlemark{#1}}
+\renewcommand{\author}[1]{\def\ZHKU@value@ch@author{#1}}
 \newcommand{\enTitle}[1]            {\def\ZHKU@value@ch@enTitle{#1}}
 \newcommand{\coverTitle}[1]         {\def\ZHKU@value@ch@coverTitle{#1}}
 \newcommand{\authorName}[1]         {\def\ZHKU@value@ch@authorName{#1}}
@@ -199,7 +204,7 @@
 \newcommand{\institute}[1]          {\def\ZHKU@value@ch@institute{#1}}
 \newcommand{\major}[1]              {\def\ZHKU@value@ch@major{#1}}
 \newcommand{\city}[1]               {\def\ZHKU@value@ch@city{#1}}
-\newcommand{\degreeConferralDate}[2]     {
+\newcommand{\degreeConferralDate}[2]{
                                       \def\ZHKU@value@ch@completionDate@year{#1}
                                       \def\ZHKU@value@ch@completionDate@month{#2}}
 
@@ -239,11 +244,13 @@
   {
     \begin{center}
       {
-        \kaishu\bfseries\fontsize{45}{\baselineskip}{硕\qquad 士\qquad 学\qquad 位\qquad 论\qquad 文}\\
+        % TODO 使用变量，并且支持学硕和专硕的标题
+        \kaishu\bfseries\fontsize{45}{\baselineskip}{\ZHKU@label@ch@thesis@mas}\\
+        % \kaishu\bfseries\fontsize{45}{\baselineskip}{\ZHKU@label@ch@thesis@mas\\\ZHKU@label@ch@thesis@special}\\
         \vspace*{\stretch{4}}
-        \heiti\bfseries\zihao{2}\textbf{\ZHKU@value@ch@coverTitle}\\
+        \heiti\bfseries\zihao{2}\textbf{\ZHKU@value@ch@title}\\
         \vspace*{\stretch{8}}
-        \heiti\zihao{3}\textbf{\ZHKU@value@ch@authorName}\\
+        \heiti\zihao{3}\textbf{\ZHKU@value@ch@author}\\
         \vspace*{\stretch{8}}
       }
       \songti\zihao{4}
@@ -375,6 +382,54 @@
         \cleardoublepage[empty]
     \fi
 }
+%===========================================================================%
+%->> 结构元素 Structure elements
+%---------------------------------------------------------------------------%
+% \ifZHKU@plain
+%     \def\contentsname{\ZHKU@label@en@tocname}
+%     \def\listfigurename{\ZHKU@label@en@lsfigname}
+%     \def\listtablename{\ZHKU@label@en@lstabname}
+%     \def\bibname{\ZHKU@label@en@bibname}
+%     \def\refname{\ZHKU@label@en@bibname}
+%     \def\algname{\ZHKU@label@en@algname}
+%     \def\bibetal{\ZHKU@label@en@bibetal}
+%     \def\biband{\ZHKU@label@en@biband}
+%     \def\axiomname{\ZHKU@label@en@axiomname}
+%     \def\theoremname{\ZHKU@label@en@theoremname}
+%     \def\lemmaname{\ZHKU@label@en@lemmaname}
+%     \def\corollaryname{\ZHKU@label@en@corollaryname}
+%     \def\assertionname{\ZHKU@label@en@assertionname}
+%     \def\propositionname{\ZHKU@label@en@propositionname}
+%     \def\conjecturename{\ZHKU@label@en@conjecturename}
+%     \def\definitionname{\ZHKU@label@en@definitionname}
+%     \def\examplename{\ZHKU@label@en@examplename}
+%     \def\remarkname{\ZHKU@label@en@remarkname}
+%     \def\proofname{\ZHKU@label@en@proofname}
+%     \def\@title{\ZHKU@value@en@titlemark}
+%     \def\@author{\ZHKU@value@en@author}
+% \else
+    \def\contentsname{\ZHKU@label@ch@tocname}
+    \def\listfigurename{\ZHKU@label@ch@lsfigname}
+    \def\listtablename{\ZHKU@label@ch@lstabname}
+    \def\algname{\ZHKU@label@ch@algname}
+    \def\bibname{\ZHKU@label@ch@bibname}
+    \def\refname{\ZHKU@label@ch@bibname}
+    \def\bibetal{\ZHKU@label@ch@bibetal}
+    \def\biband{\ZHKU@label@ch@biband}
+    \def\axiomname{\ZHKU@label@ch@axiomname}
+    \def\theoremname{\ZHKU@label@ch@theoremname}
+    \def\lemmaname{\ZHKU@label@ch@lemmaname}
+    \def\corollaryname{\ZHKU@label@ch@corollaryname}
+    \def\assertionname{\ZHKU@label@ch@assertionname}
+    \def\propositionname{\ZHKU@label@ch@propositionname}
+    \def\conjecturename{\ZHKU@label@ch@conjecturename}
+    \def\definitionname{\ZHKU@label@ch@definitionname}
+    \def\examplename{\ZHKU@label@ch@examplename}
+    \def\remarkname{\ZHKU@label@ch@remarkname}
+    \def\proofname{\ZHKU@label@ch@proofname}
+    \def\@title{\ZHKU@value@ch@titlemark}
+    \def\@author{\ZHKU@value@ch@author}
+% \fi
 %===========================================================================%
 %->> 结构布局 Structure layout
 %---------------------------------------------------------------------------%
