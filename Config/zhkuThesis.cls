@@ -185,6 +185,13 @@
 %->> 封面页 Titlepage
 %---------------------------------------------------------------------------%
 %-
+%-> 学位类型 Degree type
+%-
+% 是否专硕 professional degree
+\newif\ifZHKU@professionalDegree    \ZHKU@professionalDegreefalse
+\newcommand{\professional}          {\ZHKU@professionalDegreetrue}
+\newcommand{\academic}              {\ZHKU@professionalDegreefalse}
+%-
 %-> 中文项获取信息命令 Chinese item commands
 %-
 \newcommand{\schoolCode}[1]         {\def\ZHKU@value@ch@schoolCode{#1}}
@@ -201,6 +208,10 @@
 \newcommand{\coverTitle}[1]         {\def\ZHKU@value@ch@coverTitle{#1}}
 \newcommand{\authorName}[1]         {\def\ZHKU@value@ch@authorName{#1}}
 \newcommand{\advisor}[1]            {\def\ZHKU@value@ch@advisor{#1}}
+\newcommand{\advisorFirst}[1]       {\def\ZHKU@value@ch@advisor@first{#1}}
+\newcommand{\advisorSecond}[1]      {\def\ZHKU@value@ch@advisor@second{#1}}
+\newcommand{\professionalDegreeCategory}[1]{\def\ZHKU@value@ch@category{#1}}
+\newcommand{\field}[1]              {\def\ZHKU@value@ch@field{#1}}
 \newcommand{\institute}[1]          {\def\ZHKU@value@ch@institute{#1}}
 \newcommand{\major}[1]              {\def\ZHKU@value@ch@major{#1}}
 \newcommand{\city}[1]               {\def\ZHKU@value@ch@city{#1}}
@@ -244,9 +255,8 @@
   {
     \begin{center}
       {
-        % TODO 使用变量，并且支持学硕和专硕的标题
         \kaishu\bfseries\fontsize{45}{\baselineskip}{\ZHKU@label@ch@thesis@mas}\\
-        % \kaishu\bfseries\fontsize{45}{\baselineskip}{\ZHKU@label@ch@thesis@mas\\\ZHKU@label@ch@thesis@special}\\
+        \ifZHKU@professionalDegree{\ZHKU@label@ch@thesis@professional\\}\fi
         \vspace*{\stretch{4}}
         \heiti\bfseries\zihao{2}\textbf{\ZHKU@value@ch@title}\\
         \vspace*{\stretch{8}}
@@ -255,23 +265,47 @@
       }
       \songti\zihao{4}
       {
-        \begin{tabular}{p{7em}p{10em}}
-          {
-            \begin{flushright}
-              \bfseries\textbf{\ZHKU@label@ch@advisor}\\[18pt]
-              \bfseries\textbf{\ZHKU@label@ch@institute}\\[18pt]
-              \bfseries\textbf{\ZHKU@label@ch@major}\\[18pt]
-            \end{flushright}
-          }
-          &
-          {
-            \begin{flushleft}
-              \ZHKU@value@ch@advisor\\[18pt]
-              \ZHKU@value@ch@institute\\[18pt]
-              \ZHKU@value@ch@major\\[18pt]
-            \end{flushleft}
-          }
-        \end{tabular}
+        \ifZHKU@professionalDegree{
+          \begin{tabular}{p{7em}p{10em}}
+            {
+              \begin{flushright}
+                \bfseries\textbf{\ZHKU@label@ch@advisor@first}\\[18pt]
+                \bfseries\textbf{\ZHKU@label@ch@advisor@second}\\[18pt]
+                \bfseries\textbf{\ZHKU@label@ch@institute}\\[18pt]
+                \bfseries\textbf{\ZHKU@label@ch@category}\\[18pt]
+                \bfseries\textbf{\ZHKU@label@ch@field}\\[18pt]
+              \end{flushright}
+            }
+            &
+            {
+              \begin{flushleft}
+                \ZHKU@value@ch@advisor@first\\[18pt]
+                \ZHKU@value@ch@advisor@second\\[18pt]
+                \ZHKU@value@ch@institute\\[18pt]
+                \ZHKU@value@ch@category\\[18pt]
+                \ZHKU@value@ch@field\\[18pt]
+              \end{flushleft}
+            }
+          \end{tabular}}
+        \else{
+          \begin{tabular}{p{7em}p{10em}}
+            {
+              \begin{flushright}
+                \bfseries\textbf{\ZHKU@label@ch@advisor}\\[18pt]
+                \bfseries\textbf{\ZHKU@label@ch@institute}\\[18pt]
+                \bfseries\textbf{\ZHKU@label@ch@major}\\[18pt]
+              \end{flushright}
+            }
+            &
+            {
+              \begin{flushleft}
+                \ZHKU@value@ch@advisor\\[18pt]
+                \ZHKU@value@ch@institute\\[18pt]
+                \ZHKU@value@ch@major\\[18pt]
+              \end{flushleft}
+            }
+          \end{tabular}}
+        \fi
       } 
       \\
       \vspace*{\stretch{12}}
