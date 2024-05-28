@@ -202,9 +202,12 @@
 \renewcommand{\title}[2][\ZHKU@value@ch@title]{
                                       \def\ZHKU@value@ch@title{#2}
                                       %\def\ZHKU@value@ch@titlemark{\MakeUppercase{#1}}}
-                                      \def\ZHKU@value@ch@titlemark{#1}}
+                                      \def\ZHKU@value@ch@titleMark{#1}}
+\newcommand{\enTitle}[2][\ZHKU@value@en@title]{
+                                      \def\ZHKU@value@en@title{#2}
+                                      %\def\ZHKU@value@ch@titlemark{\MakeUppercase{#1}}}
+                                      \def\ZHKU@value@en@titleMark{#1}}
 \renewcommand{\author}[1]{\def\ZHKU@value@ch@author{#1}}
-\newcommand{\enTitle}[1]            {\def\ZHKU@value@ch@enTitle{#1}}
 \newcommand{\coverTitle}[1]         {\def\ZHKU@value@ch@coverTitle{#1}}
 \newcommand{\authorName}[1]         {\def\ZHKU@value@ch@authorName{#1}}
 \newcommand{\advisor}[1]            {\def\ZHKU@value@ch@advisor{#1}}
@@ -269,21 +272,21 @@
           \begin{tabular}{p{7em}p{10em}}
             {
               \begin{flushright}
-                \bfseries\textbf{\ZHKU@label@ch@advisor@first}\\[18pt]
-                \bfseries\textbf{\ZHKU@label@ch@advisor@second}\\[18pt]
-                \bfseries\textbf{\ZHKU@label@ch@institute}\\[18pt]
-                \bfseries\textbf{\ZHKU@label@ch@category}\\[18pt]
-                \bfseries\textbf{\ZHKU@label@ch@field}\\[18pt]
+                \bfseries\textbf{\ZHKU@label@ch@advisor@first}\\[6pt]
+                \bfseries\textbf{\ZHKU@label@ch@advisor@second}\\[6pt]
+                \bfseries\textbf{\ZHKU@label@ch@institute}\\[6pt]
+                \bfseries\textbf{\ZHKU@label@ch@category}\\[6pt]
+                \bfseries\textbf{\ZHKU@label@ch@field}\\[6pt]
               \end{flushright}
             }
             &
             {
               \begin{flushleft}
-                \ZHKU@value@ch@advisor@first\\[18pt]
-                \ZHKU@value@ch@advisor@second\\[18pt]
-                \ZHKU@value@ch@institute\\[18pt]
-                \ZHKU@value@ch@category\\[18pt]
-                \ZHKU@value@ch@field\\[18pt]
+                \ZHKU@value@ch@advisor@first\\[6pt]
+                \ZHKU@value@ch@advisor@second\\[6pt]
+                \ZHKU@value@ch@institute\\[6pt]
+                \ZHKU@value@ch@category\\[6pt]
+                \ZHKU@value@ch@field\\[6pt]
               \end{flushleft}
             }
           \end{tabular}}
@@ -442,11 +445,29 @@
 %     \def\@title{\ZHKU@value@en@titlemark}
 %     \def\@author{\ZHKU@value@en@author}
 % \else
+\def\abstractName{\ZHKU@label@ch@abstract}
+\def\abstractNameMark{\ZHKU@mark@ch@abstract}
+\def\enAbstractName{\ZHKU@label@en@abstract}
+\def\enAbstractNameMark{\ZHKU@mark@en@abstract}
+\def\enTitleValue{\ZHKU@value@en@title}
+\def\enTitleValueMark{\ZHKU@value@en@titleMark}
+    \def\coverName{\ZHKU@label@ch@cover}
+    \def\coverNameMark{\ZHKU@mark@ch@cover}
+    \def\symbolsName{\zihao{-3}\ZHKU@label@ch@symbols}
+    \def\symbolsNameMark{\ZHKU@mark@ch@symbols}
+    \def\characterName{\ZHKU@label@cn@character}
+    \def\operatorName{\ZHKU@label@cn@operator}
+    \def\abbreviationName{\ZHKU@label@cn@abbreviation}
     \def\contentsname{\ZHKU@label@ch@tocname}
+    \def\contentsNameMark{\ZHKU@mark@ch@tocname}
     \def\listfigurename{\ZHKU@label@ch@lsfigname}
     \def\listtablename{\ZHKU@label@ch@lstabname}
+    \def\listfiguretablename{\ZHKU@label@ch@lsfigtabname}
+    \def\listFigureTableNameMark{\ZHKU@mark@ch@lsfigtabname}
     \def\algname{\ZHKU@label@ch@algname}
+    \def\bibNameMark{\ZHKU@mark@ch@bibname}
     \def\bibname{\ZHKU@label@ch@bibname}
+    \def\refNameMark{\ZHKU@mark@ch@bibname}
     \def\refname{\ZHKU@label@ch@bibname}
     \def\bibetal{\ZHKU@label@ch@bibetal}
     \def\biband{\ZHKU@label@ch@biband}
@@ -461,8 +482,18 @@
     \def\examplename{\ZHKU@label@ch@examplename}
     \def\remarkname{\ZHKU@label@ch@remarkname}
     \def\proofname{\ZHKU@label@ch@proofname}
-    \def\@title{\ZHKU@value@ch@titlemark}
+    % 添加书签的命令名字不能包含@字符，这里做兼容处理
+    \def\@title{\ZHKU@value@ch@titleMark}
+    \def\titleMark{\ZHKU@value@ch@titleMark}
+    % 添加书签的命令名字不能包含@字符，这里做兼容处理
     \def\@author{\ZHKU@value@ch@author}
+    \def\authorMark{\ZHKU@value@ch@author}
+    \def\appendixNameMark{\ZHKU@mark@ch@appendix}
+    \def\appendixName{\zihao{-3}\ZHKU@label@ch@appendix}
+    \def\acknowledgeNameMark{\ZHKU@mark@ch@acknowledge}
+    \def\acknowledgeName{\zihao{-3}\ZHKU@label@ch@acknowledge}
+    \def\achievementNameMark{\ZHKU@mark@ch@achievement}
+    \def\achievementName{\ZHKU@label@ch@achievement}
 % \fi
 %===========================================================================%
 %->> 结构布局 Structure layout

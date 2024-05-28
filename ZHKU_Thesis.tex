@@ -65,13 +65,19 @@
   %-> Backmatter: Material, Data, Glossary
   %-
   \backmatter{
-    \intotoc*{\protect\cleardoublepage}{\bibname}% add link to toc
-    \artxifstreq{\artxbib}{bibtex}{% enable bibtex
-      \bibliography{Biblio/ref}% bibliography
+    %- 参考文献 Bibliography
+    % 添加链接到目录 add link to toc
+    \intotoc*{\protect\cleardoublepage}{\bibNameMark}
+    % 是否开启参考文献 enable bibtex
+    \artxifstreq{\artxbib}{bibtex}{
+      % 使用参考文献并编排 bibliography
+      \bibliography{Biblio/ref}
     }{
-      \printbibliography% bibliography
+      % 使用参考文献并编排 bibliography
+      \printbibliography
     }
     \pagestyle{empty}
+
     %- 附录、材料 Appendix, Material
     \appendix
     \input{Tex/Appendix}

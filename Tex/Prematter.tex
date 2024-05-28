@@ -1,8 +1,9 @@
-% 显示在书签但不显示在目录 FIXME 书签会显示-3
-\intobmk*{\cleardoublepage}{英文缩略词或符号表}
-\chapter*{\zihao{-3}英文缩略词或符号表}
+% 符号表显示在书签但不显示在目录 Add symbols list into bookmark
+\intobmk*{\cleardoublepage}{\symbolsNameMark}
+\chapter*{\symbolsName}
 
-\section*{字符}
+% 字符 Character
+\section*{\characterName}
 \nomenclatureitem[\textbf{Unit}]{\textbf{Symbol}}{\textbf{Description}}
 \nomenclatureitem[$\Unit{m^{2} \cdot s^{-2} \cdot K^{-1}}$]{$R$}{the gas constant}
 \nomenclatureitem[$\Unit{m^{2} \cdot s^{-2} \cdot K^{-1}}$]{$C_v$}{specific heat capacity at constant volume}
@@ -17,13 +18,15 @@
 \nomenclatureitem[$\Unit{1}$]{$\delta_{ij}$}{Kronecker tensor}
 \nomenclatureitem[$\Unit{1}$]{$I_{ij}$}{identity tensor}
 
-\section*{算子}
+% 算子 Operator
+\section*{\operatorName}
 \nomenclatureitem{\textbf{Symbol}}{\textbf{Description}}
 \nomenclatureitem{$\Delta$}{difference}
 \nomenclatureitem{$\nabla$}{gradient operator}
 \nomenclatureitem{$\delta^{\pm}$}{upwind-biased interpolation scheme}
 
-\section*{缩写}
+% 缩写 Abbreviation
+\section*{\abbreviationName}
 \nomenclatureitem{CFD}{Computational Fluid Dynamics}
 \nomenclatureitem{CFL}{Courant-Friedrichs-Lewy}
 \nomenclatureitem{EOS}{Equation of State}

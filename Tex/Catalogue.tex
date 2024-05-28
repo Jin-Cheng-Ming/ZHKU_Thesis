@@ -2,16 +2,16 @@
 \pagestyle{noheaderstyle}
 
 {
-  % 加入书签 Add into bookmark
-  \intobmk*{\cleardoublepage}{\contentsname}
+  % 将正文目录加入书签 Add into bookmark
+  \intobmk*{\cleardoublepage}{\contentsNameMark}
   % 正文目录 Content catalog
   \tableofcontents\thispagestyle{noheaderstyle}
 }
 
 
 {
-  % 加入书签 Add into bookmark
-  \intobmk*{\cleardoublepage}{图表目录}
+  % 将图标目录加入书签 Add into bookmark
+  \intobmk*{\cleardoublepage}{\listFigureTableNameMark}
 
   \let\cleardoublepage\relax
   \let\clearpage\relax

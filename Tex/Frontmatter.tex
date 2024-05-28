@@ -4,21 +4,24 @@
 %-
 %-> 生成封面
 %-
-\intobmk*{\cleardoublepage}{封面}
-\makeTitle% 生成中文封面
-% \MAKETITLE% 生成英文封面 %TODO
+\intobmk*{\cleardoublepage}{\coverNameMark~\titleMark}
+% 生成中文封面
+\makeTitle
+% TODO 生成英文封面
+% \MAKETITLE
 
 %-
 %-> 作者声明
 %-
-\makeDeclaration% 生成声明页
+% 生成声明页
+\makeDeclaration
 
 %-
 %-> 中文摘要
 %-
 % 显示在书签但不显示在目录
-\intobmk*{\cleardoublepage}{摘要}
-\chapter*{摘\quad\quad 要}
+\intobmk*{\cleardoublepage}{\abstractNameMark}
+\chapter*{\abstractName}
 
 中文摘要、英文摘要、目录、论文正文、参考文献、附录、致谢、攻读学位期间发表的学术论文与其他相关学术成果等均须由另页右页（奇数页）开始。
 
@@ -34,12 +37,12 @@
 %-
 %-> 英文摘要
 %-
-% \intobmk
-\chapter*{\zihao{-3}Taxonomic Studies on the Subfamily Drosophila\\(Diptera: Drosophilidae)}
+\intobmk*{\cleardoublepage}{\enAbstractNameMark}
+\chapter*{\zihao{-3}\enTitleValue}
 
 {
     \vspace{\baselineskip}
-    \noindent\bfseries{Abstract:}
+    \noindent\bfseries{\enAbstractName}
 }
 
 Chinese abstracts, English abstracts, table of contents, the main contents, references, appendix, acknowledgments, author's resume and academic papers published during the degree study and other relevant academic achievements must start with another right page (odd-numbered page).
