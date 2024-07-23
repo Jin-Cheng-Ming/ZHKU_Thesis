@@ -541,7 +541,7 @@
         numberformat = \rmfamily,
         aftername = \quad,
         beforeskip = {7pt},
-        afterskip = {18pt},
+        afterskip = {9pt},
         pagestyle = mainmatterstyle,
     }
 }
@@ -553,7 +553,7 @@
         format = \linespread{1.0}\zihao{4}\sffamily\raggedright,
         numberformat = \rmfamily,
         aftername = \quad,
-        beforeskip = {24pt},
+        beforeskip = {12pt},
         afterskip = {6pt},
     }
 }
@@ -566,7 +566,7 @@
         numberformat = \rmfamily,
         aftername = \quad,
         beforeskip = {12pt},
-        afterskip = {6pt},
+        afterskip = {3pt},
     }
 }
 %-
@@ -578,7 +578,7 @@
         numberformat = \rmfamily,
         aftername = \quad,
         beforeskip = {12pt},
-        afterskip = {6pt},
+        afterskip = {3pt},
     }
 }
 %-
