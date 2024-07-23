@@ -559,7 +559,7 @@
 % biber alpha bst
 \def\artxbiberalp{alphabetic}
 %- Bibtex processor + natbib package
-\ifartx@bibtex%
+\ifartx@bibtex
     % 设置标点符号和引文样式模式 Set punctuation and mode of citation style
     \newcommand{\bibstyle@super}{\bibpunct{[}{]}{,}{s}{,}{\textsuperscript{,}}}
     \newcommand{\bibstyle@numbers}{\bibpunct{[}{]}{,}{n}{,}{,}}
@@ -597,7 +597,7 @@
     }
 \fi
 %- Biber处理器和biblatex包 Biber processor + biblatex package
-\ifartx@biber%
+\ifartx@biber
     % 启用超参的biblatex检测 enable biblatex detection of hyperref
     \AtEndPreamble{\RequirePackage{hyperref}}
     % 是否启用编号引用样式 enable numbered citation style

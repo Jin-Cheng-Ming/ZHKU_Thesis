@@ -29,7 +29,7 @@
 %===========================================================================%
 %->> 文档设置 Document settings
 %---------------------------------------------------------------------------%
-\usepackage[<super>,list,table,math]{Style/artratex}
+\usepackage[<super>, authoryear, list, table, math]{Style/artratex}
 \usepackage{Style/artracom}
 %===========================================================================%
 %->> 文档包含 Document inclusion
@@ -59,6 +59,7 @@
   %-> Mainmatter: Main text, Bibliography
   %-
   \mainmatter{
+    \setlength{\parskip}{0.15\baselineskip}
     \input{Tex/Mainmatter}
   }
 
