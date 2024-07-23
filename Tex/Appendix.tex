@@ -1,9 +1,13 @@
 
-\intobmk*{\cleardoublepage}{\appendixNameMark 公式测试}
-\begin{center}
-    \heiti\bfseries\zihao{-3}\appendixName\quad 公式测试
-    \thispagestyle{plain}
-\end{center}
+{
+    \ctexset {
+        chapter = {
+            format = \linespread{1.0}\heiti\zihao{-3}\bfseries\sffamily\centering,
+            pagestyle = empty,
+        }
+    }
+    \chapter[\appendixNameMark 公式测试]{\appendixName\quad 公式测试}
+}
 
 \begin{equation} \label{eq:appedns}
     \adddotsbeforeeqnnum

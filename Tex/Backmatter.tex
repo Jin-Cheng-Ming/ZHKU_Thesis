@@ -4,11 +4,15 @@
 
 %-> 致谢 Acknowledge
 % 语法 syntax: \chapter[目录]{标题}\chaptermark{页眉}
-\intobmk*{\cleardoublepage}{\acknowledgeNameMark}
-\begin{center}
-    \heiti\bfseries\zihao{-3}\acknowledgeName
-    \thispagestyle{plain}
-\end{center}
+{
+    \ctexset {
+        chapter = {
+            format = \linespread{1.0}\heiti\zihao{-3}\bfseries\sffamily\centering,
+            pagestyle = empty,
+        }
+    }
+    \chapter[\acknowledgeNameMark]{\acknowledgeName}
+}
 \pagestyle{plain}
 % 如果需要移除当前页的页眉
 % \thispagestyle{noheaderstyle}
@@ -24,11 +28,15 @@
 \cleardoublepage[plain]
 
 %-> 简介与成就 Resume and achievement
-\intobmk*{\cleardoublepage}{\achievementNameMark}
-\begin{center}
-    \heiti\bfseries\zihao{-3}\achievementName
-    \thispagestyle{plain}
-\end{center}
+{
+    \ctexset {
+        chapter = {
+            format = \linespread{1.0}\heiti\zihao{-3}\bfseries\sffamily\centering,
+            pagestyle = empty,
+        }
+    }
+    \chapter[\achievementNameMark]{\achievementName}
+}
 \pagestyle{plain}
 
 \section*{作者简历：}
