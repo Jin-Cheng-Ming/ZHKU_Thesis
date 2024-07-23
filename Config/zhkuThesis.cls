@@ -184,6 +184,8 @@
 %===========================================================================%
 %->> 封面页 Titlepage
 %---------------------------------------------------------------------------%
+\usepackage{tikz}
+\usepackage{graphicx}
 %-
 %-> 学位类型 Degree type
 %-
@@ -351,6 +353,33 @@
   }
 }
 %===========================================================================%
+%->> 书脊页 Spine
+%---------------------------------------------------------------------------%
+\usepackage{graphicx}
+% 论文标题 title command
+\newcommand{\spineTitle}[1]        {\def\spinetitle{#1}}
+% 作者姓名 author command
+\newcommand{\spineAuthor}[1]       {\def\spineauthor{#1}}
+% 校名 institute command
+\newcommand{\spineInstitute}[1]    {\def\spineinst{#1}}
+% 年 year command
+\newcommand{\spineYear}[1]         {\def\spineyear{#1}}
+% 制作书脊命令 command for making spine
+\newcommand{\makespine}{
+  % 无页眉页尾 no header and footer  
+  \newpage\thispagestyle{empty}
+  % 结构 structure
+  \begin{center}
+    % 设置垂直空间 set vertical space
+    % \setlength{\parskip}{0.2ex}
+    % 行距 line space
+    \linespread{1.0}
+    % 字号 font property
+    \heiti\zihao{4}
+    \spinetitle\vfill\spineauthor\vfill\spineinst\vfill\spineyear
+  \end{center}
+}
+%===========================================================================%
 %->> 作者声明 Author declaration
 %---------------------------------------------------------------------------%
 \newcommand{\makeDeclaration}{
@@ -503,15 +532,17 @@
 %-
 \ctexset {
     chapter = {
-        format = \linespread{1.0}\zihao{4}\bfseries\sffamily\centering,
-        nameformat = {},
-        titleformat = {},
+        format = \linespread{1.0}\heiti\zihao{-3}\bfseries\sffamily,
+        % name = {第,章},
+        name = {},
+        nameformat={},
+        titleformat={},
         number = \arabic{chapter},
         numberformat = \rmfamily,
         aftername = \quad,
         beforeskip = {7pt},
         afterskip = {18pt},
-        pagestyle = plain,
+        pagestyle = mainmatterstyle,
     }
 }
 %-
@@ -519,7 +550,7 @@
 %-
 \ctexset {
     section = {
-        format = \linespread{1.0}\zihao{-4}\sffamily\raggedright,
+        format = \linespread{1.0}\zihao{4}\sffamily\raggedright,
         numberformat = \rmfamily,
         aftername = \quad,
         beforeskip = {24pt},

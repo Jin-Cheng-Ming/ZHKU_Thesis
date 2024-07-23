@@ -53,6 +53,7 @@
     \input{Tex/Prematter}
     \input{Tex/Catalogue}
   }
+
   %-
   %-> 主体部分：正文、参考文献（不编号）
   %-> Mainmatter: Main text, Bibliography
@@ -60,6 +61,7 @@
   \mainmatter{
     \input{Tex/Mainmatter}
   }
+
   %-
   %-> 附录部分：材料、数据术语汇编
   %-> Backmatter: Material, Data, Glossary
@@ -69,14 +71,20 @@
     % 添加链接到目录 add link to toc
     \intotoc*{\protect\cleardoublepage}{\bibNameMark}
     % 是否开启参考文献 enable bibtex
-    \artxifstreq{\artxbib}{bibtex}{
-      % 使用参考文献并编排 bibliography
-      \bibliography{Biblio/ref}
-    }{
-      % 使用参考文献并编排 bibliography
-      \printbibliography
+    {
+      \ctexset {
+        chapter = {
+            pagestyle = empty,
+        }
+      }
+      \centering\artxifstreq{\artxbib}{bibtex}{
+        % 使用参考文献并编排 bibliography
+        \bibliography{Biblio/ref}
+      }{
+        % 使用参考文献并编排 bibliography
+        \printbibliography
+      }
     }
-    \pagestyle{empty}
 
     %- 附录、材料 Appendix, Material
     \appendix

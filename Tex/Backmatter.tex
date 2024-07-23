@@ -4,7 +4,12 @@
 
 %-> 致谢 Acknowledge
 % 语法 syntax: \chapter[目录]{标题}\chaptermark{页眉}
-\chapter[\acknowledgeNameMark]{\acknowledgeName}
+\intobmk*{\cleardoublepage}{\acknowledgeNameMark}
+\begin{center}
+    \heiti\bfseries\zihao{-3}\acknowledgeName
+    \thispagestyle{plain}
+\end{center}
+\pagestyle{plain}
 % 如果需要移除当前页的页眉
 % \thispagestyle{noheaderstyle}
 % 如果需要移除整章的页眉
@@ -19,7 +24,11 @@
 \cleardoublepage[plain]
 
 %-> 简介与成就 Resume and achievement
-\chapter[\achievementNameMark]{\achievementName}
+\intobmk*{\cleardoublepage}{\achievementNameMark}
+\begin{center}
+    \heiti\bfseries\zihao{-3}\achievementName
+    \thispagestyle{plain}
+\end{center}
 \pagestyle{plain}
 
 \section*{作者简历：}
@@ -29,7 +38,7 @@
 
 ××××年××月——××××年××月，在中国科学院××研究所（或中国科学院大学××院系）攻读博士/硕士学位。
 
-工作经历：
+\section*{工作经历：}
 
 \lipsum[1-2]
 

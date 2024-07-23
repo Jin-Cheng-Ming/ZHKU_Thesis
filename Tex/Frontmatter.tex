@@ -6,9 +6,20 @@
 %-
 \intobmk*{\cleardoublepage}{\coverNameMark~\titleMark}
 % 生成中文封面
+\pagecolor{orange}
+\schoolLogo[height=2.2cm]{zhku_logo_gray}
+\makeTitle
+\pagecolor{white}
+\schoolLogo[height=2.2cm]{zhku_logo}
 \makeTitle
 % TODO 生成英文封面
 % \MAKETITLE
+
+%-
+%-> 书脊
+%-
+% 生成书脊页
+\makespine
 
 %-
 %-> 作者声明
@@ -21,7 +32,10 @@
 %-
 % 显示在书签但不显示在目录
 \intobmk*{\cleardoublepage}{\abstractNameMark}
-\chapter*{\abstractName}
+\begin{center}
+    \heiti\bfseries\zihao{-3}\abstractName
+    \thispagestyle{plain}
+\end{center}
 
 中文摘要、英文摘要、目录、论文正文、参考文献、附录、致谢、攻读学位期间发表的学术论文与其他相关学术成果等均须由另页右页（奇数页）开始。
 
@@ -38,7 +52,10 @@
 %-> 英文摘要
 %-
 \intobmk*{\cleardoublepage}{\enAbstractNameMark}
-\chapter*{\zihao{-3}\enTitleValue}
+\begin{center}
+    \heiti\bfseries\zihao{-3}\enTitleValue
+    \thispagestyle{plain}
+\end{center}
 
 {
     \vspace{\baselineskip}
