@@ -1,32 +1,30 @@
-\setcounter{page}{1}\pagenumbering{roman}
 \pagestyle{noheaderstyle}
 
 {
   % 将正文目录加入书签 Add into bookmark
   \intobmk*{\cleardoublepage}{\contentsNameMark}
   % 正文目录 Content catalog
-  \tableofcontents\thispagestyle{noheaderstyle}
+  \setcounter{page}{1}\pagenumbering{roman}
+  \tableofcontents
 }
 
 
 {
-  % 将图标目录加入书签 Add into bookmark
+  % 将图表目录加入书签 Add into bookmark
   \intobmk*{\cleardoublepage}{\listFigureTableNameMark}
 
-  \let\cleardoublepage\relax
-  \let\clearpage\relax
   \renewcommand*{\addvspace}[1]{}
   \let\oldnumberline\numberline
   
   % 图目录 List of figures
   \renewcommand{\numberline}{\figurename~\oldnumberline}
-  {\centering\listoffigures\thispagestyle{noheaderstyle}}
+  {\centering\listoffigures}
 
   \renewcommand*{\addvspace}[1]{}
   \vspace{1cm}
 
   % 表目录 List of tables
   \renewcommand{\numberline}{\tablename~\oldnumberline}
-  {\centering\listoftables\thispagestyle{noheaderstyle}}
+  {\centering\listoftables}
 }
 

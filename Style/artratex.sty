@@ -823,8 +823,8 @@
 \setcounter{tocdepth}{2}% depth for the table of contents
 \setcounter{secnumdepth}{3}% depth for section numbering, default is 2(subsub)
 %- Set equation, figure, table numbering
-\numberwithin{equation}{section}% set enumeration level
-\renewcommand{\theequation}{\thesection\arabic{equation}}% configure the label style
+\numberwithin{equation}{chapter}% set enumeration level
+\renewcommand{\theequation}{\thechapter.\arabic{equation}}% configure the label style
 % \numberwithin{figure}{section}% set enumeration level
 % \renewcommand{\thefigure}{\thesection\arabic{figure}}% configure the label style
 % \numberwithin{table}{section}% set enumeration level
@@ -870,11 +870,11 @@
         % 清除区域 clear fields
         \fancyhf{}
         % 结构元素 structure elements
-        \fancyhead[C]{\footnotesize \ifnumodd{\value{page}}{\leftmark}{\@title}} % FIXME
+        % \fancyhead[C]{\footnotesize \ifnumodd{\value{page}}{\leftmark}{\@title}} % FIXME
         % 页面编号 page number
         \fancyfoot[C]{\footnotesize \thepage}
         % 页眉规范 header rule
-        \renewcommand{\headrulewidth}{0.8pt}
+        \renewcommand{\headrulewidth}{0pt}
         % 页脚规范 footer rule
         \renewcommand{\footrulewidth}{0pt}
     }
@@ -882,11 +882,11 @@
     % 清除区域 clear fields
     \fancyhf{}
     % 结构元素 structure elements
-    \fancyhead[C]{\footnotesize \ifnumodd{\value{page}}{\leftmark}{\ZHKU@value@en@title}}
+    % \fancyhead[C]{\footnotesize \ifnumodd{\value{page}}{\leftmark}{\ZHKU@value@en@title}}
     % 页面编号 page number
     \fancyfoot[C]{\footnotesize \thepage}
     % 页眉规范 header rule
-    \renewcommand{\headrulewidth}{0.8pt}
+    \renewcommand{\headrulewidth}{0pt}
     % 页脚规范 footer rule
     \renewcommand{\footrulewidth}{0pt}
     }
@@ -897,7 +897,7 @@
         % 结构元素 structure elements
         \fancyhead[C]{\footnotesize \ifnumodd{\value{page}}{\leftmark}{\@title}}
         % 页面编号 page number
-        \fancyfoot[C]{\footnotesize \ifnumodd{\value{page}}{\hspace*{\fill}\thepage}{\thepage\hspace*{\fill}}}
+        \fancyfoot[C]{\footnotesize \thepage}
         % 页眉规范 header rule
         \renewcommand{\headrulewidth}{0.8pt}
         % 页脚规范 footer rule
@@ -907,11 +907,11 @@
         % 清除区域 clear fields
         \fancyhf{}
         % 结构元素 structure elements
-        \fancyhead[C]{\footnotesize \ifnumodd{\value{page}}{\leftmark}{\@title}}
+        % \fancyhead[C]{\footnotesize \ifnumodd{\value{page}}{\leftmark}{\@title}}
         % 页面编号 page number
-        \fancyfoot[C]{\footnotesize \ifnumodd{\value{page}}{\hspace*{\fill}\thepage}{\thepage\hspace*{\fill}}}
+        \fancyfoot[C]{\footnotesize \thepage}
         % 页眉规范 header rule
-        \renewcommand{\headrulewidth}{0.8pt}
+        \renewcommand{\headrulewidth}{0pt}
         % 页脚规范 footer rule
         \renewcommand{\footrulewidth}{0pt}
     }
@@ -959,7 +959,7 @@
         % 结构元素 structure elements
         %\fancyhead[C]{\footnotesize \ifnumodd{\value{page}}{\leftmark}{\@title}}
         % 页面编号 page number
-        \fancyfoot[C]{\footnotesize \ifnumodd{\value{page}}{\hspace*{\fill}\thepage}{\thepage\hspace*{\fill}}}
+        \fancyfoot[C]{\footnotesize \thepage}
         % 页眉规范 header rule
         \renewcommand{\headrulewidth}{0pt}
         % 页脚规范 footer rule
@@ -1078,12 +1078,35 @@
 %-
 \makeatletter
 \renewcommand\tableofcontents{
+    \ctexset {
+        chapter = {
+            format = \linespread{1.0}\heiti\zihao{-3}\bfseries\sffamily\centering,
+            pagestyle = noheaderstyle,
+        }}
     \null\hfill{\heiti\zihao{-3}\bfseries\ZHKU@label@ch@tocname}\hfill\null\par
     \@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}
     \@starttoc{toc}
 }
-\renewcommand{\listfigurename}{\ZHKU@label@ch@lsfigname}
-\renewcommand{\listtablename}{\ZHKU@label@ch@lstabname}
+\renewcommand\listoffigures{
+    \ctexset {
+        chapter = {
+            format = \linespread{1.0}\heiti\zihao{-3}\bfseries\sffamily\centering,
+            pagestyle = noheaderstyle,
+        }}
+    \null\hfill{\heiti\zihao{-3}\bfseries\ZHKU@label@ch@lsfigname}\hfill\null\par
+    \@mkboth{\MakeUppercase\listfigurename}{\MakeUppercase\listfigurename}
+    \@starttoc{lof}
+}
+\renewcommand\listoftables{
+    \ctexset {
+        chapter = {
+            format = \linespread{1.0}\heiti\zihao{-3}\bfseries\sffamily\centering,
+            pagestyle = noheaderstyle,
+        }}
+    \null\hfill{\heiti\zihao{-3}\bfseries\ZHKU@label@ch@lstabname}\hfill\null\par
+    \@mkboth{\MakeUppercase\listtablename}{\MakeUppercase\listtablename}
+    \@starttoc{lot}
+}
 \makeatother
 %===========================================================================%
 \endinput
