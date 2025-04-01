@@ -181,6 +181,13 @@
     \vspace{\baselineskip}
     \zihao{-4}
     \noindent {\bfseries\ZHKU@label@en@keywords}~#1}
+
+\newcommand{\ebook}{
+  % 保存 cleardoublepage 的原始定义
+  \let\oldcleardoublepage\cleardoublepage 
+  % 将 cleardoublepage 重定义为 clearpage
+  \renewcommand{\cleardoublepage}[1][plain]{\clearpage}}
+
 %===========================================================================%
 %->> 封面页 Titlepage
 %---------------------------------------------------------------------------%
@@ -595,4 +602,5 @@
 %---------------------------------------------------------------------------%
 \usepackage{array}
 \usepackage{longtable}
+\usepackage{makecell}
 %===========================================================================%

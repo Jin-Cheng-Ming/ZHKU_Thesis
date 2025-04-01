@@ -44,6 +44,10 @@
 \input{Tex/Frontinfo}
 
 \begin{document}
+
+  % 打开\ebook代码使电子版不留空白页
+  \ebook
+
   %-
   %-> 前置部分：封面、声明、摘要、目录列表、符号列表
   %-> Frontmatter: Title page, Declaration , Abstract, Content list, Symbol list
@@ -68,6 +72,7 @@
   %-> Backmatter: Material, Data, Glossary
   %-
   \backmatter{
+    \pagestyle{noheaderstyle}
     %- 参考文献 Bibliography
     % 添加链接到目录 add link to toc
     \intotoc*{\protect\cleardoublepage}{\bibNameMark}
@@ -75,7 +80,7 @@
     {
       \ctexset {
         chapter = {
-            pagestyle = empty,
+            pagestyle = noheaderstyle,
         }
       }
       \centering\artxifstreq{\artxbib}{bibtex}{
@@ -87,17 +92,16 @@
       }
     }
 
-    %- 附录、材料 Appendix, Material
-    \appendix
-    \input{Tex/Appendix}
-    % 开始页码与符号
-    \setcounter{page}{1}\pagenumbering{Roman}
-    \pagestyle{empty}
+    \cleardoublepage[plain]
 
-    %- 致谢、成果 Acknowledge, Achievements
-    \backmatter
-    \input{Tex/Backmatter}
-    \pagestyle{empty}
+    \appendix {
+      % 开始页码与符号
+      \setcounter{page}{1}\pagenumbering{Roman}
+      %- 附录、材料 Appendix, Material
+      \input{Tex/Appendix}
+      %- 致谢、成果 Acknowledge, Achievements
+      \input{Tex/Backmatter}
+    }
   }
 \end{document}
 %===========================================================================%

@@ -20,5 +20,6 @@
 *.spl
 *.synctex.gz
 *.fdb_latexmk
+._wordcount_selection.tex
 
 .vscode/

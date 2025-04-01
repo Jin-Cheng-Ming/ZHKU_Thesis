@@ -1,20 +1,19 @@
-\setcounter{page}{1}\pagenumbering{roman}
+\cleardoublepage
 \pagestyle{noheaderstyle}
 
 {
   % 将正文目录加入书签 Add into bookmark
   \intobmk*{\cleardoublepage}{\contentsNameMark}
   % 正文目录 Content catalog
+  \setcounter{page}{1}\pagenumbering{roman}
   \tableofcontents\thispagestyle{noheaderstyle}
 }
 
 
 {
-  % 将图标目录加入书签 Add into bookmark
+  % 将图表目录加入书签 Add into bookmark
   \intobmk*{\cleardoublepage}{\listFigureTableNameMark}
 
-  \let\cleardoublepage\relax
-  \let\clearpage\relax
   \renewcommand*{\addvspace}[1]{}
   \let\oldnumberline\numberline
   

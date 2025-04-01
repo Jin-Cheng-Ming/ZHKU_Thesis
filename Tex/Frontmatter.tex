@@ -32,9 +32,9 @@
 %-
 % 显示在书签但不显示在目录
 \intobmk*{\cleardoublepage}{\abstractNameMark}
+\pagestyle{plain}
 \begin{center}
     \heiti\bfseries\zihao{-3}\abstractName
-    \thispagestyle{plain}
 \end{center}
 
 % 填写中文摘要
@@ -55,16 +55,17 @@
 %-> 英文摘要
 %-
 \intobmk*{\cleardoublepage}{\enAbstractNameMark}
-\begin{center}
-    {\heiti\bfseries\zihao{-3}\enTitleValue}
+\pagestyle{plain}
+% \begin{center}
+%     {\heiti\bfseries\zihao{-3}\enTitleValue}
 
-    % 填写作者英文名
-    MouMou Gao
+%     % 填写作者英文名
+%     Xinyu Ding
 
-    % 填写作者单位英文名
-    Zhongkai University of Agriculture and Engineering
-    \thispagestyle{plain}
-\end{center}
+%     % 填写作者单位英文名
+%     Zhongkai University of Agriculture and Engineering
+%     \thispagestyle{plain}
+% \end{center}
 
 {
     \vspace{\baselineskip}
