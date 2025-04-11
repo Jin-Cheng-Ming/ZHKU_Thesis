@@ -17,14 +17,15 @@
 \confidential{} 
 % 校徽与校名：一般不变，保持即可
 \schoolLogo[height=2.2cm]{zhku_logo}
-%- 标题：第一个空位中括号（可选，默认封面标题）给书签文件名等预留的（一般一行字），第二个空位大括号（必填）是给封面标题排版的（可自定义换行），按实际情况填写
+%- 标题：中括号（可选，默认封面标题中获取，即大括号内容）内容是给书签、文件名等预留的文本（一般一行字），
+%       大括号（必填）内容是给封面标题排版的（可自定义换行），按实际情况填写
 % 中文标题
 % \title{东洋区冠果蝇亚科系统分类学研究}
 \title[东洋区冠果蝇亚科系统分类学研究（双翅目：果蝇科）]{东洋区冠果蝇亚科系统分类学研究\\（双翅目：果蝇科）}
 % 英文标题
 % \enTitle{Taxonomic Studies on the Subfamily Drosophila(Diptera: Drosophilidae)}
 \enTitle[Taxonomic Studies on the Subfamily Drosophila(Diptera: Drosophilidae)]{Taxonomic Studies on the Subfamily Drosophila\\(Diptera: Drosophilidae)}
-% 作者
+% 作者，~~表示输出空格
 \author{高~~某~~某}
 
 % 培养单位：自己所在的学院或者研究所等，按照实际情况填写
@@ -34,30 +35,26 @@
 % 学校所在地：一般不变，保持即可
 \city{中国·广州}
 % 授予学位时间：一般上半年是6月，下半年是12月，按照实际情况填写年月
-\degreeConferralDate{2024}{6}
+\degreeConferralDate{2025}{6}
 
 %- 学硕信息
-\academic
-% 指导老师
+% 指导老师：按照实际情况填写（~~表示输出空格）
 \advisor{陈某某~~教授}
 
-
-% 是否专硕（不是专硕要取消下行代码，也即注释掉，专硕的信息会忽略）
-\professional
-% 第一指导教师
+% 专硕信息
+% 第一指导教师：按照实际情况填写（\quad 表示输出空格，注意代码与后续内容用空格隔开）
 \advisorFirst{张某某\quad 教授}
-% 第二指导教师
+% 第二指导教师：按照实际情况填写（\quad 表示输出空格，注意代码与后续内容用空格隔开）
 \advisorSecond{李~~四\quad 研究员}
-% 专业学位类别
+% 专业学位类别：按照实际情况填写
 \professionalDegreeCategory{农业硕士}
-% 领域
+% 领域：按照实际情况填写
 \field{农村发展}
 
 
 %-
 %-> 英文封面信息
 %-
-% TODO
 % 英文标题：按照实际情况填写
 \enTitle{Taxonomic Studies on the Subfamily Drosophila \\ (Diptera: Drosophilidae)}
 
@@ -65,11 +62,12 @@
 %-
 %-> 书脊信息
 %-
-% 论文中文题目
-\spineTitle{仲\par 恺\par 农\par 业\par 工\par 程\par 学\par 院\par 学\par 位\par 论\par 文\par \rotatebox[origin=c]{-90}{~\LaTeX{}~}\par 模\par 板\par }
-% 论文作者
-\spineAuthor{厉\par 飞\par 雨}
-% 学校名称
+% 论文中文题目：按照实际情况填写（注意要与封面页的标题一致，\\表示换行）
+\spineTitle{仲\\恺\\农\\业\\工\\程\\学\\院\\学\\位\\论\\文\\\rotatebox[origin=c]{-90}{~\LaTeX{}~}\\模\\板\\}
+% 论文作者：按照实际情况填写（注意要与封面页的作者一致，\\表示换行）
+\spineAuthor{厉\\飞\\雨}
+% 学校名称：一般不变，保持即可（\\表示换行）
 \spineInstitute{仲\\恺\\农\\业\\工\\程\\学\\院}
-\spineYear{二\\${\bigcirc}$\\二\\四\\年}
+% 论文发表年份：根据实际情况填写（注意要与封面页的授予学位时间一致，\\表示换行）
+\spineYear{二\\${\bigcirc}$\\二\\五\\年}
 %---------------------------------------------------------------------------%

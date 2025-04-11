@@ -1,5 +1,5 @@
 %===========================================================================%
-% 仲恺农业工程学院学位论文Latex模板
+% 仲恺农业工程学院学位论文LaTeX模板
 %===========================================================================%
 %% ZHKU_Thesis.tex
 %% Copyright 2024 Xinyu Ding <ding.xin.yu@foxmail.com> 
@@ -15,17 +15,6 @@
 %->> 文档类声明 Document class declaration
 %---------------------------------------------------------------------------%
 \documentclass[twoside]{Config/zhkuThesis}
-%- 文档打印多参数设置 Multiple optional arguments:
-%- 打印方式：单面打印、双面打印或出版物打印
-%- [<oneside|twoside|print>]% oneside eprint, twoside eprint, or paper print
-%- 字体集：特别指定字体集而不是自动检测
-%- [fontset=<adobe|none|...>]% specify font set instead of automatic detection
-%- 框架：留学生论文写作
-%- [scheme=plain]% thesis writing of international students
-%- 草稿版本：显示草稿版本
-%- [draftversion]% show draft version information
-%- 其他：ctex book类的标准设置
-%- [standard options for ctex book class: draft|paper size|font size|...]%
 %===========================================================================%
 %->> 文档设置 Document settings
 %---------------------------------------------------------------------------%
@@ -45,8 +34,17 @@
 
 \begin{document}
 
-  % 打开\ebook代码使电子版不留空白页
-  \ebook
+  % 无空白页 
+  % 打开 \noblankpages 代码则输出不留空白页的PDF文件，适用于电子版传阅（如盲审）
+  % 若取消这行代码（注释掉）则输出非正文部分重要页面从偶数页（右侧）开始的PDF文件，适用于打印出版
+  \noblankpages
+
+  % 盲审模式，打开则会使用“**”隐藏作者与导师相关相关信息，但是正文部分出现的个人信息则需要手动隐藏
+  % \review
+
+  % 学位类型：academic | professional
+  % academic为学硕，professional为专硕，默认专硕
+  \degreeType[professional]
 
   %-
   %-> 前置部分：封面、声明、摘要、目录列表、符号列表
@@ -65,6 +63,11 @@
   \mainmatter{
     \setlength{\parskip}{0.15\baselineskip}
     \input{Tex/Mainmatter}
+    \pagestyle{noheaderstyle}
+    %- 参考文献 Bibliography
+    %- 可以自定义路径
+    \makeBibliography{Biblio/ref}
+    \cleardoublepage[plain]
   }
 
   %-
@@ -72,34 +75,13 @@
   %-> Backmatter: Material, Data, Glossary
   %-
   \backmatter{
-    \pagestyle{noheaderstyle}
-    %- 参考文献 Bibliography
-    % 添加链接到目录 add link to toc
-    \intotoc*{\protect\cleardoublepage}{\bibNameMark}
-    % 是否开启参考文献 enable bibtex
-    {
-      \ctexset {
-        chapter = {
-            pagestyle = noheaderstyle,
-        }
-      }
-      \centering\artxifstreq{\artxbib}{bibtex}{
-        % 使用参考文献并编排 bibliography
-        \bibliography{Biblio/ref}
-      }{
-        % 使用参考文献并编排 bibliography
-        \printbibliography
-      }
-    }
-
-    \cleardoublepage[plain]
-
     \appendix {
       % 开始页码与符号
       \setcounter{page}{1}\pagenumbering{Roman}
       %- 附录、材料 Appendix, Material
       \input{Tex/Appendix}
       %- 致谢、成果 Acknowledge, Achievements
+      % 用于盲审的论文需隐去致谢、发表论文、科研成果、简历（注释掉）
       \input{Tex/Backmatter}
     }
   }

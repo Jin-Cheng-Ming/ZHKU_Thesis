@@ -182,12 +182,19 @@
     \zihao{-4}
     \noindent {\bfseries\ZHKU@label@en@keywords}~#1}
 
-\newcommand{\ebook}{
+\newcommand{\noblankpages}{
   % 保存 cleardoublepage 的原始定义
   \let\oldcleardoublepage\cleardoublepage 
   % 将 cleardoublepage 重定义为 clearpage
   \renewcommand{\cleardoublepage}[1][plain]{\clearpage}}
 
+\newcommand{\review}{
+  \studentCode{ *~~* }
+  \author{ *~~* }
+  \advisor{ *~~* }
+  \advisorFirst{ *~~* }
+  \advisorSecond{ *~~* }
+  \spineAuthor{ * \\ * }}
 %===========================================================================%
 %->> 封面页 Titlepage
 %---------------------------------------------------------------------------%
@@ -200,6 +207,11 @@
 \newif\ifZHKU@professionalDegree    \ZHKU@professionalDegreefalse
 \newcommand{\professional}          {\ZHKU@professionalDegreetrue}
 \newcommand{\academic}              {\ZHKU@professionalDegreefalse}
+\newcommand{\degreeType}[1][professional]{
+  \ifstrequal{#1}{academic}
+    {\academic}
+    {\professional}
+}
 %-
 %-> 中文项获取信息命令 Chinese item commands
 %-
@@ -454,6 +466,27 @@
         \thispagestyle{empty}
         \cleardoublepage[empty]
     \fi
+}
+%===========================================================================%
+%->> 参考文献 Bibliography
+%---------------------------------------------------------------------------%
+\newcommand{\makeBibliography}[1][Biblio/ref]{
+  % 添加链接到目录 add link to toc
+  \intotoc*{\protect\cleardoublepage}{\bibNameMark}
+  {
+    \ctexset {
+      chapter = {
+          pagestyle = noheaderstyle,
+      }
+    }
+    \centering\artxifstreq{\artxbib}{bibtex}{
+      % 使用参考文献并编排 bibliography
+      \bibliography{#1}
+    }{
+      % 使用参考文献并编排 bibliography
+      \printbibliography
+    }
+  }
 }
 %===========================================================================%
 %->> 结构元素 Structure elements
