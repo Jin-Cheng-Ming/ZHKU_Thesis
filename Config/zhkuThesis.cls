@@ -188,13 +188,25 @@
   % 将 cleardoublepage 重定义为 clearpage
   \renewcommand{\cleardoublepage}[1][plain]{\clearpage}}
 
+\newif\ifZHKU@review \ZHKU@reviewfalse
 \newcommand{\review}{
+  \ZHKU@reviewtrue
   \studentCode{ *~~* }
   \author{ *~~* }
   \advisor{ *~~* }
   \advisorFirst{ *~~* }
   \advisorSecond{ *~~* }
   \spineAuthor{ * \\ * }}
+\newcommand{\ifreview}[2]{
+  \ifZHKU@review
+    % 如果为盲审模式则
+    #1 
+  \else
+    % 否则
+    #2 
+  \fi
+}
+
 %===========================================================================%
 %->> 封面页 Titlepage
 %---------------------------------------------------------------------------%
