@@ -47,11 +47,7 @@ git clone https://gitee.com/DingXinYu/ZHKU_Thesis.git
 
 ### 在线编辑编译
 
-推荐使用 [TexPage](https://www.texpage.com)，因为相比 Overleaf，TexPage 的网络环境更稳定，中文编译适配更好，没有编译页数限制。将项目文件压缩包上传至 TexPage 中在线编辑。编译该模板请使用 XeLaTeX 引擎，使用默认的设置即可顺利完成编译生成 PDF 文件。
-
-或者直接使用平台审核通过的模板导入自己的项目中。
-
-> **注意**：TexPage 模板正在上传审核中。
+推荐使用 [TexPage](https://www.texpage.com)，因为相比 Overleaf，TexPage 的网络环境更稳定，中文编译适配更好，没有编译页数限制。将项目文件压缩包上传至 TexPage 中在线编辑。编译该模板请使用 XeLaTeX 引擎，使用默认的设置即可顺利完成编译生成 PDF 文件。也可以直接在TexPage发布的[模板](https://www.texpage.com/zh/template/6ff6d020-886b-4266-8295-17551280ff57)新建项目使用。
 
 ### 本地编辑编译
 
