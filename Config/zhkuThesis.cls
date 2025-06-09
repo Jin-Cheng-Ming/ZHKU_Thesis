@@ -594,7 +594,7 @@
         aftername = \quad,
         beforeskip = {7pt},
         afterskip = {9pt},
-        pagestyle = mainmatterstyle,
+        pagestyle = noheaderstyle,
     }
 }
 %-
