@@ -1077,9 +1077,31 @@
 %-> 目录 Catalogue
 %-
 \makeatletter
+\usepackage{titletoc}
+\titlecontents{chapter}[0pt]
+    % 字体设置
+    {\normalfont\zihao{-4}\bfseries}
+    % 标题前设置
+    {\thecontentslabel~~ } 
+    % 页码前设置
+    {}
+    % 页码后设置
+    {\hspace{.5em}\titlerule*{ .}\contentspage}
+\titlecontents{section}[0pt]
+    {\normalfont\zihao{-4}}
+    {\thecontentslabel~~ }
+    {}
+    {\hspace{.5em}\titlerule*{ .}\contentspage}
+\titlecontents{subsection}[0pt]
+    {\normalfont\zihao{-4}}
+    {\thecontentslabel~~ }
+    {}
+    {\hspace{.5em}\titlerule*{ .}\contentspage}
 \renewcommand\tableofcontents{
     \null\hfill{\heiti\zihao{-3}\bfseries\ZHKU@label@ch@tocname}\hfill\null\par
     \@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}
+    % 添加1.5倍行距
+    \linespread{1.5}
     \@starttoc{toc}
 }
 \renewcommand\listoffigures{
