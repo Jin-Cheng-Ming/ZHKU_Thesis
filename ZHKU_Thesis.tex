@@ -14,7 +14,9 @@
 %===========================================================================%
 %->> 文档类声明 Document class declaration
 %---------------------------------------------------------------------------%
-\documentclass[twoside]{Config/zhkuThesis}
+% 打印方式：oneside 单面打印，电子版将无空白页 | twoside 双面打印，需要自定义控制空白页
+% 章节阅读方式：openany 打开任意页开始，默认从奇数页（右侧）开始（openright）
+\documentclass[oneside, openany]{Config/zhkuThesis}
 %===========================================================================%
 %->> 文档设置 Document settings
 %---------------------------------------------------------------------------%
@@ -33,11 +35,6 @@
 \input{Tex/Frontinfo}
 
 \begin{document}
-
-  % 无空白页 
-  % 打开 \noblankpages 代码则输出不留空白页的PDF文件，适用于电子版传阅（如盲审）
-  % 若取消这行代码（注释掉）则输出非正文部分重要页面从偶数页（右侧）开始的PDF文件，适用于打印出版
-  \noblankpages
 
   % 盲审模式，打开则会使用“**”隐藏作者与导师相关相关信息，但是正文部分出现的个人信息则需要手动隐藏
   % \review
@@ -76,7 +73,7 @@
   %-
   \backmatter{
     \appendix {
-      % 开始页码与符号
+      % 开始页码与符号（注释下行可使页码继续上文的页码）
       \setcounter{page}{1}\pagenumbering{Roman}
       %- 附录、材料 Appendix, Material
       \input{Tex/Appendix}
