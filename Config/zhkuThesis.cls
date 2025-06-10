@@ -584,7 +584,7 @@
 %-
 \ctexset {
     chapter = {
-        format = \linespread{1.0}\heiti\zihao{-3}\bfseries\sffamily,
+        format = \linespread{1.5}\heiti\zihao{-3}\sffamily,
         % name = {第,章},
         name = {},
         nameformat={},
@@ -592,8 +592,8 @@
         number = \arabic{chapter},
         numberformat = \rmfamily,
         aftername = \quad,
-        beforeskip = {7pt},
-        afterskip = {9pt},
+        beforeskip = {0pt plus 0pt minus 0pt},
+        afterskip = {0pt plus 0pt minus 0pt},
         pagestyle = noheaderstyle,
     }
 }
@@ -602,11 +602,11 @@
 %-
 \ctexset {
     section = {
-        format = \linespread{1.0}\zihao{4}\sffamily\raggedright,
+        format = \linespread{1.5}\heiti\zihao{4}\sffamily\raggedright,
         numberformat = \rmfamily,
         aftername = \quad,
-        beforeskip = {12pt},
-        afterskip = {6pt},
+        beforeskip = {0pt plus 0pt minus 0pt},
+        afterskip = {0pt plus 0pt minus 0pt},
     }
 }
 %-
@@ -614,11 +614,11 @@
 %-
 \ctexset {
     subsection = {
-        format = \linespread{1.0}\zihao{-4}\sffamily\raggedright,
+        format = \linespread{1.5}\heiti\zihao{-4}\sffamily\raggedright,
         numberformat = \rmfamily,
         aftername = \quad,
-        beforeskip = {12pt},
-        afterskip = {3pt},
+        beforeskip = {0pt plus 0pt minus 0pt},
+        afterskip = {0pt plus 0pt minus 0pt},
     }
 }
 %-
@@ -626,11 +626,11 @@
 %-
 \ctexset {
     subsubsection = {
-        format = \linespread{1.0}\zihao{-4}\sffamily\raggedright,
+        format = \linespread{1.5}\zihao{-4}\sffamily\raggedright,
         numberformat = \rmfamily,
         aftername = \quad,
-        beforeskip = {12pt},
-        afterskip = {3pt},
+        beforeskip = {0pt plus 0pt minus 0pt},
+        afterskip = {0pt plus 0pt minus 0pt},
     }
 }
 %-
@@ -646,6 +646,11 @@
 %-> 脚注 footnote
 %-
 \renewcommand{\thefootnote}{\raisebox{.5pt}{\textcircled{\raisebox{-.9pt}\arabic{footnote}}}}
+% 重新定义 \footnote 命令以改变字体样式
+\let\oldfootnote\footnote
+\renewcommand{\footnote}[1]{%
+  \oldfootnote{\kaishu{\zihao{-5} #1}}
+}
 %===========================================================================%
 %->> 组件 Component
 %---------------------------------------------------------------------------%
