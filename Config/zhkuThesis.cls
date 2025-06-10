@@ -173,7 +173,7 @@
 \newcommand{\keywords}[1]{
     \vspace{\baselineskip}
     \zihao{-4}
-    \noindent {\heiti\bfseries\ZHKU@label@ch@keywords}~\songti{#1}}
+    \noindent {\heiti\ZHKU@label@ch@keywords}~\songti{#1}}
 %-
 %-> 定义英文关键字环境 define engish keywords
 %-
@@ -291,12 +291,19 @@
   {
     \begin{center}
       {
-        \kaishu\bfseries\fontsize{45}{\baselineskip}{\ZHKU@label@ch@thesis@mas}\\
-        \ifZHKU@professionalDegree{\ZHKU@label@ch@thesis@professional\\}\fi
-        \vspace*{\stretch{4}}
-        \heiti\bfseries\zihao{2}\textbf{\ZHKU@value@ch@title}\\
+        {
+          \fontseries{sb}
+          {\linespread{1}\kaishu\fontsize{45}{\baselineskip}{\ZHKU@label@ch@thesis@mas}\\}
+          {\linespread{1}\ifZHKU@professionalDegree{\ZHKU@label@ch@thesis@professional\\}\fi}
+        }
+        \vspace*{\stretch{5}}
+        {
+          \linespread{1}\heiti\zihao{2}{\ZHKU@value@ch@title}\\
+        }
         \vspace*{\stretch{8}}
-        \heiti\zihao{3}\textbf{\ZHKU@value@ch@author}\\
+        {
+          \heiti\zihao{3}{\ZHKU@value@ch@author}\\
+        }
         \vspace*{\stretch{8}}
       }
       \songti\zihao{4}
@@ -421,7 +428,7 @@
         \songti\fontsize{15}{1}
 
         \begin{center}
-          \songti\bfseries\fontsize{21.5}{\baselineskip}
+          \songti\fontseries{sb}\fontsize{21.5}{\baselineskip}
           {\ZHKU@label@ch@university} \\[9pt]
           {\ZHKU@label@ch@declare@creativity}
         \end{center}
@@ -438,7 +445,7 @@
         \vspace*{6ex}
 
         \begin{center}
-          \songti\bfseries\fontsize{21.5}{\baselineskip}
+          \songti\fontseries{sb}\fontsize{21.5}{\baselineskip}
           {\ZHKU@label@ch@declare@rights}
         \end{center}
 
@@ -456,7 +463,7 @@
         \vspace*{6ex}
 
         \begin{center}
-          \songti\bfseries\fontsize{21.5}{\baselineskip}  
+          \songti\fontseries{sb}\fontsize{21.5}{\baselineskip}  
           {\ZHKU@label@ch@declare@submission}
         \end{center}
 
