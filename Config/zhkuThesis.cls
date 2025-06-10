@@ -489,6 +489,7 @@
   {
     \ctexset {
       chapter = {
+          format = \linespread{1.0}\heiti\zihao{-3}\centering,
           pagestyle = noheaderstyle,
       }
     }
@@ -585,7 +586,7 @@
 %-
 \ctexset {
     chapter = {
-        format = \linespread{1.5}\heiti\zihao{-3}\sffamily,
+        format = \linespread{1.5}\heiti\zihao{-3}\raggedright,
         % name = {第,章},
         name = {},
         nameformat={},
@@ -603,7 +604,7 @@
 %-
 \ctexset {
     section = {
-        format = \linespread{1.5}\heiti\zihao{4}\sffamily\raggedright,
+        format = \linespread{1.5}\heiti\zihao{4}\raggedright,
         numberformat = \rmfamily,
         aftername = \quad,
         beforeskip = {0pt plus 0pt minus 0pt},
@@ -615,7 +616,7 @@
 %-
 \ctexset {
     subsection = {
-        format = \linespread{1.5}\heiti\zihao{-4}\sffamily\raggedright,
+        format = \linespread{1.5}\heiti\zihao{-4}\raggedright,
         numberformat = \rmfamily,
         aftername = \quad,
         beforeskip = {0pt plus 0pt minus 0pt},
@@ -627,7 +628,7 @@
 %-
 \ctexset {
     subsubsection = {
-        format = \linespread{1.5}\zihao{-4}\sffamily\raggedright,
+        format = \linespread{1.5}\zihao{-4}\raggedright,
         numberformat = \rmfamily,
         aftername = \quad,
         beforeskip = {0pt plus 0pt minus 0pt},
