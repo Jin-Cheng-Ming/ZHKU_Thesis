@@ -642,6 +642,10 @@
         number = \rmfamily\Alph{chapter},
     }
 }
+%-
+%-> 脚注 footnote
+%-
+\renewcommand{\thefootnote}{\raisebox{.5pt}{\textcircled{\raisebox{-.9pt}\arabic{footnote}}}}
 %===========================================================================%
 %->> 组件 Component
 %---------------------------------------------------------------------------%
